@@ -1,0 +1,7 @@
+.BuilderWrapper{
+    background-color: var(--background-color);
+    color: var(--font-color);
+
+    height:50vh;
+    width: 100%;
+}

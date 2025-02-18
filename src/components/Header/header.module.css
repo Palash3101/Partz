@@ -1,0 +1,38 @@
+.headerWrapper{
+    background-color: var(--background-header);
+    color: var(--font-color);
+
+    padding-top: 6px;
+
+}
+
+.headerTitle{
+    font-size: 36px;
+    text-align: center;
+
+    background-color: var(--background-header);
+    color: var(--font-color);
+}
+
+.headerSearchButton{
+    text-align: center;
+
+    background-color: var(--background-color-search);
+    color: #EEEEEE;
+
+    height: 45px;
+    margin-left: 3px;
+
+    border-color: black;
+    border-width: 3px
+}
+
+.headerSearchButtonWrapper{
+    display: flex;
+
+    background-image: linear-gradient(var(--background-header),  var(--background-color));
+    color: #EEEEEE;
+
+    padding-left: 30px;
+
+}

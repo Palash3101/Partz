@@ -1,0 +1,64 @@
+.buyButton {
+    align-items: center;
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 30%,#00DDEB);
+    border: 0;
+    border-radius: 8px;
+
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 14px;
+    justify-content: center;
+    line-height: 1em;
+    
+    max-width: 100%;
+    min-width: 140px;
+
+
+    padding: 3px;
+    margin-top: 12px;
+
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  
+  .buyButton:active,
+  .buyButton:hover {
+    outline: 0;
+  }
+  
+  .buyButton span {
+    background-color: rgb(5, 6, 45);
+    padding: 8px 15px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 350ms;
+  }
+  
+  .buyButton:hover span {
+    background: none;
+  }
+  
+
+
+  .CardWrapper{
+    transition: all;
+    transition: 500ms;
+
+    display: flex;
+    flex-direction: column;
+    
+    width:230px;
+
+  }
+
+  .CardWrapper:hover{
+    transform: scale(1.05);
+    transition: 500ms;
+  }

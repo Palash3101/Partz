@@ -1,0 +1,6 @@
+.footerWrapper{
+    background-color: black;
+    color: var(--font-color);
+
+    height: 40vh;
+}
