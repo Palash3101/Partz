@@ -5,6 +5,7 @@ import React from 'react'
 import Ideas from './ideas';
 import Prebuilts from './prebuilts';
 
+
 function HomePage() {
     const Guides = [
         {
@@ -85,7 +86,8 @@ function HomePage() {
             <LampDemo />
         </div>
 
-        <Ideas ideas={Guides}/>
+
+        <Ideas data={Guides}/>
 
         <Prebuilts data={PreBuilts}/>
 

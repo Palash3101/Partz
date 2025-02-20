@@ -41,3 +41,38 @@ a{
     background-color: var(--background-color);
 }
 
+
+
+
+
+.embla {
+    overflow:hidden;
+  }
+  .embla__container {
+    display: flex;
+
+  }
+
+  .embla__slide {
+    flex: 0 0 100%; /* Default slide covers 100% of the viewport */
+    height: 200px;
+    margin: auto;
+    width: 400px;
+    border-width: 10px;
+
+    opacity: 0.1;
+
+
+    background-color: #000000;
+    color: #00717f;
+
+    padding: auto;
+
+  }
+  @media (min-width: 768px) {
+    .embla__slide {
+      flex: 0 0 60%; /* Breakpoint SM slide covers 50% of the viewport */
+    }
+  }
+  
+

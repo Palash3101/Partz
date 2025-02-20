@@ -2,41 +2,37 @@ import React from 'react'
 import styles from './IdeaCard.module.css';
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
-function IdeaCard({index, setIndex, ideas}) {
-    const len = 5;
-
+function IdeaCard({scrollNext, scrollPrev, data, id}) {
 
   return (
-    <div className={styles.ideasSectionCard}>
-    
-    <moti
+    <div className={styles.ideasSectionCard} id={id}>
 
-    <button className={styles.ideasSectionButton} onClick={()=>{setIndex(index-1);console.log(index);}}>
+    <button className={styles.ideasSectionButton} onClick={scrollPrev}>
         <HiChevronLeft style={{scale:3}}/>
     </button>
 
     <div className={styles.ideasSectionMainWrapper}>
         <div className='h-[90%] max-w-[450px] mt-[5%] ml-[10px]'>
             <div className='text-3xl font-bold mb-[50px] h-[0.3rem]'>
-                {ideas[(index)%len]["title"]}
+                {data["title"]}
             </div>
             <br/>
             <ul className='list-disc list-inside pl-3 mt-[5px]'>
-                <li>{ideas[(index)%len]["description"]}</li>
-                <li>{ideas[(index)%len]["CPU"]}</li>
-                <li>{ideas[(index)%len]["GPU"]}</li>
+                <li>{data["description"]}</li>
+                <li>{data["CPU"]}</li>
+                <li>{data["GPU"]}</li>
             </ul>
             <br/>
             <button className='bg-[rgb(2,6,23)] text-white px-len py-2 rounded-2xl w-[150px]'>Build Guide</button>
         </div>
         <div className='bg-white h-[90%] my-[5%] text-[rgb(2,6,23)] text-center rounded-2xl min-w-[170px] w-[170px] mr-[10px]'>  
             <div 
-                style={{backgroundImage:`url(${ideas[(index)%len].image})`}} 
+                style={{backgroundImage:`url(${data.image})`}} 
                 className='h-full w-full rounded-3xl bg-center bg-cover duration-300' />
         </div>
     </div>
 
-    <button className={styles.ideasSectionButton} onClick={()=>{setIndex(index+1);console.log(index);}}>
+    <button className={styles.ideasSectionButton} onClick={scrollNext}>
         <HiChevronRight style={{scale:3}}/>
     </button>        
     </div>
