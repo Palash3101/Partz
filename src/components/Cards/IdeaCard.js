@@ -2,10 +2,11 @@ import React from 'react'
 import styles from './IdeaCard.module.css';
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
-function IdeaCard({scrollNext, scrollPrev, data, id}) {
+function IdeaCard({scrollNext, scrollPrev, data,id, ref}) {
+    
 
   return (
-    <div className={styles.ideasSectionCard} id={id}>
+    <div className={id==0?styles.ideasSectionCardSelected:styles.ideasSectionCard} id={id} ref={ref}>
 
     <button className={styles.ideasSectionButton} onClick={scrollPrev}>
         <HiChevronLeft style={{scale:3}}/>
@@ -23,7 +24,7 @@ function IdeaCard({scrollNext, scrollPrev, data, id}) {
                 <li>{data["GPU"]}</li>
             </ul>
             <br/>
-            <button className='bg-[rgb(2,6,23)] text-white px-len py-2 rounded-2xl w-[150px]'>Build Guide</button>
+            <button className='bg-[rgb(2,6,23)] text-white px-len py-2 rounded-2xl w-[150px] mb-[10px]'>Build Guide</button>
         </div>
         <div className='bg-white h-[90%] my-[5%] text-[rgb(2,6,23)] text-center rounded-2xl min-w-[170px] w-[170px] mr-[10px]'>  
             <div 

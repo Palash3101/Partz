@@ -1,34 +1,37 @@
 "use client"
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect, useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import IdeaCard from './IdeaCard';
 
 export default function EmblaCarousel({data}) {
   const [emblaRef, emblaApi] = useEmblaCarousel({loop:true, watchDrag:true})
     const len=5;
-  const [index, setIndex] = useState(5);
+
+  const itemsRef = useRef([]);
+
+
+  function fader(){
+    itemsRef.current[emblaApi.selectedScrollSnap()].style.opacity=1;
+    itemsRef.current[emblaApi.previousScrollSnap()].style.opacity=0.5;   
+  }
+
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
-    setIndex((index) => (index - 1)%len);
-    node;
+    fader();
 
 }, [emblaApi])
 
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
-    setIndex((index) => (index + 1)%len);
-    node;
-
+    fader();
   }, [emblaApi])
 
 
+//   useEffect(() => {
+//     fader();
+//   }, []);
 
-  
-  const node = useEffect(() => {
-    if (emblaApi) console.log(emblaApi.selectedScrollSnap());
-    
-  }, [index, emblaApi])
 
 
   return (
@@ -37,10 +40,13 @@ export default function EmblaCarousel({data}) {
        
         {data.map((item, i) => (
           <IdeaCard key={i} id={i}
+            ref = {(element) => (itemsRef.current[i] = element)}
             scrollNext={scrollNext}
             scrollPrev={scrollPrev} 
             data={item} />
-        ))}
+        ))
+        }
+
 
       </div>
     </div>
