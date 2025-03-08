@@ -3,6 +3,7 @@
 import React from 'react'
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
 import { useState } from 'react';
+import PriceSubmenu from '../FilterSubmenus/PriceSubmenu';
 
 function FilterSidebar() {
 
@@ -29,13 +30,12 @@ function FilterSidebar() {
             Price
         </span>
 
-        <button className='pr-1.5' onClick={()=>{setPriceToggle(!priceToggle)}}>
-            {priceToggle ? 
-                <HiChevronDown style={{scale:2.2}}/> : 
-                <HiChevronUp style={{scale:2.2}}/>
-            }
-        </button>
+        <DropdownButton Toggle={priceToggle} SetToggle={setPriceToggle}/>
+
+
     </div>
+
+    {priceToggle?<PriceSubmenu/>:null}
     <hr className='w-[90%] mt-2 mb-1 ml-2'/>   
 
 
@@ -56,7 +56,7 @@ function FilterSidebar() {
 
 
 
-    <div className='flex justify-between px-2'>
+    {/* <div className='flex justify-between px-2'>
         <span className='font-bold text-lg'>
             Rating
         </span>
@@ -85,10 +85,24 @@ function FilterSidebar() {
             }
         </button>
     </div>
-    <hr className='w-[90%] mt-2 mb-1 ml-2'/>  
+    <hr className='w-[90%] mt-2 mb-1 ml-2'/>  */}
 
     </div>
   )
 }
 
 export default FilterSidebar
+
+
+
+export function DropdownButton({Toggle, SetToggle}){
+    return(
+    <button className='pr-1.5' onClick={()=>{SetToggle(!Toggle)}}>
+    {Toggle ? 
+        <HiChevronUp style={{scale:2.2}}/>:
+        <HiChevronDown style={{scale:2.2}}/> 
+        
+    }
+    </button>
+    )
+}
