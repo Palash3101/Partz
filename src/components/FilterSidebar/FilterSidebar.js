@@ -5,6 +5,9 @@ import { HiChevronDown, HiChevronUp } from "react-icons/hi";
 import { useState } from 'react';
 import PriceSubmenu from '../FilterSubmenus/PriceSubmenu';
 
+import styles from './FilterSidebar.module.css'
+import BrandSubmenu from '../FilterSubmenus/BrandSubmenu';
+
 function FilterSidebar() {
 
     var [priceToggle, setPriceToggle] = useState(false);
@@ -16,76 +19,48 @@ function FilterSidebar() {
 
 
   return (
-    <div className='w-[33vh] h-4/5 rounded-[30px] bg-black/40 mx-6 p-3 text-[var(--text-color)] '>
+    <div className='w-[38vh] max-h-auto rounded-[30px] bg-black/40 ml-6 p-3 text-[var(--text-color)] '>
 
-    <center><span className='font-bold text-xl '>
+    <center  className='font-bold text-4xl mb-5'>
+      <span>
         Filters
-    </span></center> 
+      </span>
+    </center> 
 
-    <hr className='w-[90%] mt-3 mb-1 ml-2'/>             
+    <hr className={styles.line}/>             
     
 
-    <div className='flex justify-between px-2'>
-        <span className='font-bold text-lg'>
+    <div className={styles.submenuClassGroup}>
+        <span className={styles.submenuHeading}>
             Price
         </span>
 
         <DropdownButton Toggle={priceToggle} SetToggle={setPriceToggle}/>
 
-
     </div>
 
-    {priceToggle?<PriceSubmenu/>:null}
-    <hr className='w-[90%] mt-2 mb-1 ml-2'/>   
+    <PriceSubmenu state={priceToggle}/>
 
 
 
-    <div className='flex justify-between px-2'>
-        <span className='font-bold text-lg'>
+    <hr className={styles.line}/>   
+
+
+
+    <div className={styles.submenuClassGroup}>
+        <span className={styles.submenuHeading}>
             Brand
         </span>
 
-        <button className='pr-1.5' onClick={()=>{setBrandToggle(!brandToggle)}}>
-            {brandToggle ? 
-                <HiChevronDown style={{scale:2.2}}/> : 
-                <HiChevronUp style={{scale:2.2}}/>
-            }
-        </button>
+        <DropdownButton Toggle={brandToggle} SetToggle={setBrandToggle}/>
+
     </div>
-    <hr className='w-[90%] mt-2 mb-1 ml-2'/>  
+
+    <BrandSubmenu state={brandToggle}/>
+
+    <hr className={styles.line}/>  
 
 
-
-    {/* <div className='flex justify-between px-2'>
-        <span className='font-bold text-lg'>
-            Rating
-        </span>
-
-        <button className='pr-1.5' onClick={()=>{setRatingToggle(!ratingToggle)}}>
-            {ratingToggle ? 
-                <HiChevronDown style={{scale:2.2}}/> : 
-                <HiChevronUp style={{scale:2.2}}/>
-            }
-        </button>
-    </div>
-    <hr className='w-[90%] mt-2 mb-1 ml-2'/>  
-
-
-
-
-    <div className='flex justify-between px-2'>
-        <span className='font-bold text-lg'>
-            Type
-        </span>
-
-        <button className='pr-1.5 transition delay-500' onClick={()=>{setTypeToggle(!typeToggle)}}>
-            {typeToggle ? 
-                <HiChevronDown style={{scale:2.2}}/> : 
-                <HiChevronUp style={{scale:2.2}}/>
-            }
-        </button>
-    </div>
-    <hr className='w-[90%] mt-2 mb-1 ml-2'/>  */}
 
     </div>
   )
