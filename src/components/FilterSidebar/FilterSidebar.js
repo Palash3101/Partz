@@ -3,10 +3,11 @@
 import React from 'react'
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
 import { useState } from 'react';
-import PriceSubmenu from '../FilterSubmenus/PriceSubmenu';
-
 import styles from './FilterSidebar.module.css'
+
+import PriceSubmenu from '../FilterSubmenus/PriceSubmenu';
 import BrandSubmenu from '../FilterSubmenus/BrandSubmenu';
+import RatingSubmenu from '../FilterSubmenus/RatingSubmenu';
 
 function FilterSidebar() {
 
@@ -58,7 +59,21 @@ function FilterSidebar() {
 
     <BrandSubmenu state={brandToggle}/>
 
-    <hr className={styles.line}/>  
+    <hr className={styles.line}/>
+
+
+    <div className={styles.submenuClassGroup}>
+        <span className={styles.submenuHeading}>
+            Rating
+        </span>
+
+        <DropdownButton Toggle={ratingToggle} SetToggle={setRatingToggle}/>
+
+    </div>
+
+    <RatingSubmenu state={ratingToggle}/>
+
+    <hr className={styles.line}/> 
 
 
 

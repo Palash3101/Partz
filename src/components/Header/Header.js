@@ -1,25 +1,37 @@
+'use client'
+
 import React from 'react'
 import styles from './header.module.css';
 import Link from 'next/link';
 
+import { HiSearch,HiChevronDown, HiChevronUp  } from "react-icons/hi";
+import { useState } from 'react';
+
 function Header() {
+  const [productsToggle, setProductsToggle] = useState(false);
+
+
   return (
-    <div className={styles.headerWrapper}  data-theme="dark">
-        <div className={styles.headerTitle}>
+    <main className={styles.headerWrapper}  data-theme="dark">
+      <div>
+      <div className={styles.headerTitle}>
             Partz
         </div>        
 
         <div className={styles.headerSearchButtonWrapper}>
             <Link href={'/'}>
-            <button className={styles.headerSearchButton} >Search</button>
+            <button className={styles.headerSearchButton} >
+              <HiSearch style={{scale:1.3, margin:'1px'}}/>
+            </button>
             </Link>
             <button className={styles.headerSearchButton}>Builder</button>
 
             <button className={styles.headerSearchButton}>Guides</button>
 
-            <Link href={'/products'}>
-            <button className={styles.headerSearchButton}>Products</button>
-            </Link>
+            <button className={styles.headerSearchButton} onClick={()=>setProductsToggle(!productsToggle)}>
+              Products
+              <HiChevronDown style={{scale:1.3,  marginLeft:'5px', marginBottom:'5px'}}/>
+            </button>
 
             <button className={styles.headerSearchButton}>PreBuilts</button>
 
@@ -27,9 +39,13 @@ function Header() {
 
             <button className={styles.headerSearchButton}>Forums</button>
         </div>
-    </div>
+      </div>
+
+    </main>
     
   )
 }
 
-export default Header;
+export default Header
+
+

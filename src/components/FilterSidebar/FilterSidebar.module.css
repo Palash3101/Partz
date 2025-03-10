@@ -9,6 +9,8 @@
 .submenuHeading{
   font-weight: bold;
   font-size: x-large;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .submenuClassGroup{
