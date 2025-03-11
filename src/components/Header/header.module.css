@@ -5,6 +5,8 @@
     padding-top: 6px;
     padding-bottom: 6px;
 
+    position: relative;
+
 
 }
 
@@ -42,4 +44,19 @@
 
     padding-left: 30px;
 
+}
+
+
+.headerSubmenuWrapper{
+  background-color: rgba(255,255,255, 0.2);
+  color: var(--font-color);
+  position: absolute;
+  top: 125px; 
+  left: 2.5%;
+  z-index: 10;
+  height: 220px;
+  width: 95%;
+
+  border-radius: 30px;
+  padding: 10px 15px;
 }

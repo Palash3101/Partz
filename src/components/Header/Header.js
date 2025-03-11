@@ -7,6 +7,9 @@ import Link from 'next/link';
 import { HiSearch,HiChevronDown, HiChevronUp  } from "react-icons/hi";
 import { useState } from 'react';
 
+import {AnimatePresence} from "motion/react";
+import ProductsSubmenu from '@/components/ui/ProductsSubmenu';
+
 function Header() {
   const [productsToggle, setProductsToggle] = useState(false);
 
@@ -40,12 +43,15 @@ function Header() {
             <button className={styles.headerSearchButton}>Forums</button>
         </div>
       </div>
+      <AnimatePresence>
 
+      {productsToggle &&
+        <ProductsSubmenu toggle={productsToggle} setToggle={setProductsToggle}/>
+    }
+      </AnimatePresence>
     </main>
     
   )
 }
 
 export default Header
-
-

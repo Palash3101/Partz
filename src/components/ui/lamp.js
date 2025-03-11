@@ -13,7 +13,7 @@ export function LampDemo() {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="bg-gradient-to-br from-slate-300 to-slate-500 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
+          className="h-[150px] bg-gradient-to-br from-slate-300 to-slate-500 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
           Build PC'S<br /> the right way
         </motion.h1>
       </LampContainer>
@@ -31,7 +31,7 @@ export const LampContainer = ({
         className
       )}>
       <div
-        className="relative flex w-full flex-1 scale-y-100 items-center justify-center isolate z-0 ">
+        className="relative flex w-full flex-1 scale-y-110 items-center justify-center isolate z-0 ">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
@@ -71,7 +71,7 @@ export const LampContainer = ({
         <div
           className="absolute top-1/2 z-50 h-38 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
         <div
-          className="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-cyan-500 opacity-50 blur-3xl"></div>
+          className="absolute inset-auto z-50 h-39 w-[28rem] -translate-y-1/2 rounded-full bg-cyan-500 opacity-50 blur-3xl"></div>
         <motion.div
           initial={{ width: "8rem" }}
           whileInView={{ width: "16rem" }}
