@@ -38,9 +38,9 @@ function Header() {
 
             <button className={styles.headerSearchButton}>PreBuilts</button>
 
-            <button className={styles.headerSearchButton}>BenchMarks</button>
+            {/* <button className={styles.headerSearchButton}>BenchMarks</button> */}
 
-            <button className={styles.headerSearchButton}>Forums</button>
+            {/* <button className={styles.headerSearchButton}>Forums</button> */}
         </div>
       </div>
       <AnimatePresence>
