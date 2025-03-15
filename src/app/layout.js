@@ -10,8 +10,7 @@ export default function Layout({ children }) {
           {/* Place children where you want to render a page or nested layout */}
           <main>
             <Header />
-
-            {children}
+              {children}
             <Footer />
         </main>
         </body>

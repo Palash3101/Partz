@@ -27,16 +27,21 @@ function Header() {
               <HiSearch style={{scale:1.3, margin:'1px'}}/>
             </button>
             </Link>
-            <button className={styles.headerSearchButton}>Builder</button>
+            <Link href={'/builder'}>
+                <button className={styles.headerSearchButton}>Builder</button>
+            </Link>
 
+            <Link href={'/guides'}>
             <button className={styles.headerSearchButton}>Guides</button>
-
+            </Link>
+            
             <button className={styles.headerSearchButton} onClick={()=>setProductsToggle(!productsToggle)}>
               Products
               <HiChevronDown style={{scale:1.3,  marginLeft:'5px', marginBottom:'5px'}}/>
             </button>
-
-            <button className={styles.headerSearchButton}>PreBuilts</button>
+            <Link href={'/products/prebuilts'}>
+              <button className={styles.headerSearchButton}>PreBuilts</button>
+            </Link>
 
             {/* <button className={styles.headerSearchButton}>BenchMarks</button> */}
 

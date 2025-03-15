@@ -3,8 +3,9 @@
     color: var(--font-color);
 
     padding-top: 25px;
+    padding-bottom: 1px;
 
-    height:150vh;
+    height:auto;
     width: 100%;
 }
 
@@ -16,7 +17,7 @@
 
 .BuilderGridItem{
   display: grid;
-  grid-template-columns: 0.75fr 3.4fr 1fr 0.6fr 0.6fr 0.1fr;
+  grid-template-columns: 0.75fr 3.6fr 1fr 0.3fr 0.6fr 0.1fr;
 
   height: 70px;
 
@@ -30,7 +31,7 @@
 
   border-radius: 20px;
 
-  padding: 8px;
+  padding: 8px 0px;
 
   text-align: left;
 
