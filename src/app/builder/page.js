@@ -159,7 +159,7 @@ function Builder() {
           </div>
           
           <button className=' mx-3 bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg text-xl'>
-            Complete Build
+            Compare Build
           </button>
         </div>
       </center>

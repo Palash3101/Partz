@@ -6,7 +6,7 @@ import { HiShoppingBag } from "react-icons/hi2";
 import { Rating } from 'react-simple-star-rating'
 import Link from 'next/link';
 
-function CpuGridCard(props) {
+function GridCard(props) {
   return (
     <div className='bg-black/40 grid grid-cols-[115px_1fr_120px] grid-rows-1 rounded-[20px] p-4 text-[var(--text-color)] w-full h-[180px] hover:shadow-lg transition-all duration-200'>
       <div className='col-span-1 flex items-center justify-center'>
@@ -82,4 +82,4 @@ function CpuGridCard(props) {
   );
 }
 
-export default CpuGridCard;
+export default GridCard;

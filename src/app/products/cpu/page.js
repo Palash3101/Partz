@@ -3,9 +3,9 @@
 import React, {useState} from 'react'
 import styles from '../page.module.css';
 import FilterSidebar from '@/components/FilterSidebar/FilterSidebar';
-import CpuGridCard from './CpuGridCard';
+import GridCard from './GridCard';
 
-import { FaSort, FaFilter } from "react-icons/fa";
+import { FaSort} from "react-icons/fa";
 import { RiGridFill, RiListUnordered } from "react-icons/ri";
 
 
@@ -206,7 +206,7 @@ function CpuPage() {
           <div className='mt-7 grid grid-cols-1 lg:grid-cols-2 gap-5'>
             {
               ProductData.slice(slice, slice+12).map((data, index) => (
-                <CpuGridCard 
+                <GridCard 
                   key={index}
                   data={data}
                 />

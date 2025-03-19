@@ -1,20 +1,9 @@
-.pageWrapper{
-  color: var(--font-color);
-
-  height:10vh;
-  width: 100%;
-
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-
 .pageMainSection{
   background-image: linear-gradient(var(--background-color),  var(--background-ideas), var(--background-color), black);
   color: var(--font-color);
 
   padding-top: 25px;
-  height: auto;
+  height: aut0;
 
   width: 100%;
 

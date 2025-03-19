@@ -1,21 +1,56 @@
-import React from 'react'
-import { motion } from 'framer-motion';
+import React, {useState} from 'react'
+import { animate, AnimatePresence, motion } from 'framer-motion';
 import styles from '../Header/header.module.css';
 import Link from 'next/link';
+import { RiSpotifyFill } from 'react-icons/ri';
 
 function ProductsSubmenu({toggle, setToggle}){
 
   const topBuilds = [1,2,3];
+  const mainVariation={
+    initial:{
+      scaleY:0,
+      opacity:0
+    },
+    
+    animate:{
+      scaleY:1,
+      opacity:1,
+      transition:{
+        duration:0.45,
+        type:"spring",
+        stiffness:550,
+        damping:25
+      }
+
+    },
+    exit:{
+      scaleY:0,
+      opacity:0,
+      transition:{
+        duration:0.45,
+        type:"spring",
+      }
+    },
+
+  }
 
   return(
+    
+      <AnimatePresence>
+
+      {toggle &&
+      
       <motion.div 
-      initial={{opacity:0, height:0}}
-      animate={{opacity:1, height:'auto'}} 
-      exit={{opacity:0, height:0}}
-      transition={{duration:0.25}}
+      variants={mainVariation}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+
+      
       className={styles.headerSubmenuWrapper}
       >
-      
+
       <div className='grid grid-cols-4 items-center justify-center'>
         <SubmenuCard setToggle={setToggle} image='/images/cpu.png' title='CPU'/>
         <SubmenuCard setToggle={setToggle} image='/images/cpu.png' title='GPU'/>
@@ -38,14 +73,25 @@ function ProductsSubmenu({toggle, setToggle}){
             <SubmenuCardBuilds setToggle={setToggle} topBuilds={topBuilds[2]}/>
 
           </div>
-          <Link href="/builds" className=" mx-3 mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded ">
+          <Link 
+            href="/products/prebuilts" 
+            className=" mx-3 mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded "
+            onClick={()=>setToggle(false)}
+            >
             Explore Pre-Builts
           </Link>
-          <Link href="/builds" className="mx-3 mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded ">
+          <Link 
+            href="/guides" 
+            className="mx-3 mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded "
+            onClick={()=>setToggle(false)}
+            >
             Explore Build Guides
           </Link>
       </div>
     </motion.div>
+  }
+    </AnimatePresence>
+  
   )
 }
 
