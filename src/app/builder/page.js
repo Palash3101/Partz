@@ -38,24 +38,6 @@ function Builder() {
       is: true
     },
     {
-      type: "CPU Cooler",
-      id: "T7U3V9",
-      img: "https://example.com/cooler.jpg",
-      name: "Noctua NH-D15",
-      price: 89.99,
-      wattage: 10,
-      is: true
-    },
-    {
-      type: "GPU Cooler",
-      id: "W5X2Y8",
-      img: "https://example.com/gpu_cooler.jpg",
-      name: "NZXT Kraken G12",
-      price: 49.99,
-      wattage: 5,
-      is: true
-    },
-    {
       type: "Power Supply",
       id: "A1B6C4",
       img: "https://example.com/psu.jpg",
