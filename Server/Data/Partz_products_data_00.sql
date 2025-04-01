@@ -63,78 +63,7 @@ INSERT INTO `GPU` (`id`, `VRAM`, `base_clock`, `boost_clock`, `cuda_cores`, `rt_
 ('pQ3r4S5', 12, 2.31, 2.61, 7680, 60, 285, 4.0, 'Dual Slot', TRUE, 3.0, NULL),
 ('D1z8K3p', 16, 1.7, 2.3, 3840, 60, 300, 4.0, 'Dual Slot', TRUE, NULL, 2.0),
 ('h6G5f4E', 10, 1.4, 1.7, 8704, 68, 320, 4.0, 'Dual Slot', TRUE, 2.0, NULL),
-('e6F5g4H', 12, 2.3, 2.6, 2560, 40, 230, 4.0, 'Dual Slot', TRUE, NULL, 2.0);
-
-
-
-INSERT INTO `motherboard` (`id`, `socket`, `chipset`, `form_factor`, `PCI-e_lookup`, `Memory_lookup`, `storage_lookup`, `ports_lookup`) VALUES
-('W5gL0rT', 'LGA 1700', 'Z790', 'ATX', 'pci123', 'mem456', 'str789', 'por012'),
-('I7j8K9l', 'AM5', 'B650', 'ATX', 'pci345', 'mem678', 'strabc', 'por345'),
-('tU6v7W8', 'AM5', 'X670E', 'ATX', 'pci678', 'mem901', 'strdef', 'por678'),
-('T0rW5gL', 'LGA 1700', 'Z790', 'ATX', 'pci901', 'mem234', 'strhij', 'por901'),
-('l9K8j7I', 'AM5', 'B650E', 'ATX', 'pci234', 'mem567', 'strklm', 'por234'),
-('i3J2k1L', 'LGA 1700', 'Z790', 'ATX', 'pci567', 'mem890', 'strnop', 'por567');
-
-
-
-
-INSERT INTO `PCI-e_lookup` (`id`, `Slot_type`, `generation`, `amount`) VALUES
-('pci123', 16, 5.0, 1),
-('pci123', 16, 4.0, 1),
-('pci123', 1, 3.0, 3),
-('pci345', 16, 4.0, 1),
-('pci345', 1, 3.0, 2),
-('pci678', 16, 5.0, 2),
-('pci678', 1, 4.0, 1),
-('pci901', 16, 5.0, 1),
-('pci901', 16, 4.0, 2),
-('pci234', 16, 5.0, 1),
-('pci234', 16, 4.0, 1),
-('pci567', 16, 5.0, 1),
-('pci567', 16, 4.0, 2);
-
-
-INSERT INTO `Memory_lookup` (`id`, `ddr_generation`, `amount`, `channel`, `max_amount`, `max_speed`) VALUES
-('mem456', 5, 4, 2, 128, 7200),
-('mem678', 5, 4, 2, 128, 6400),
-('mem901', 5, 4, 2, 192, 8000),
-('mem234', 5, 4, 2, 128, 7600),
-('mem567', 5, 4, 2, 128, 6800),
-('mem890', 5, 4, 2, 192, 7800);
-
-
-
-INSERT INTO `storage_lookup` (`id`, `Type`, `amount`, `genertion`) VALUES
-('str789', 'M.2', 5, 4.0),
-('str789', 'SATA', 6, 3.0),
-('strabc', 'M.2', 2, 4.0),
-('strabc', 'SATA', 4, 3.0),
-('strdef', 'M.2', 4, 5.0),
-('strdef', 'SATA', 8, 3.0),
-('strhij', 'M.2', 4, 4.0),
-('strhij', 'SATA', 6, 3.0),
-('strklm', 'M.2', 3, 5.0),
-('strklm', 'SATA', 4, 3.0),
-('strnop', 'M.2', 5, 4.0),
-('strnop', 'SATA', 8, 3.0);
-
-
-
-INSERT INTO `ports_lookup` (`id`, `type`, `amount`) VALUES
-('por012', 'USB 3.2 Gen 2x2', 2),
-('por012', 'USB 3.2 Gen 2', 8),
-('por012', 'USB 3.2 Gen 1', 6),
-('por345', 'USB 3.2 Gen 2', 6),
-('por345', 'USB 3.2 Gen 1', 4),
-('por678', 'USB4', 2),
-('por678', 'USB 3.2 Gen 2', 4),
-('por901', 'USB 3.2 Gen 2x2', 1),
-('por901', 'USB 3.2 Gen 2', 6),
-('por901', 'USB 3.2 Gen 1', 4),
-('por234', 'USB 3.2 Gen 2x2', 2),
-('por234', 'USB 3.2 Gen 2', 6),
-('por567', 'USB4', 2),
-('por567', 'USB 3.2 Gen 2', 6);
+('e6F5g4H', 12, 2.3, 2.6, 2560, 40, 230, 4.0, 'Dual Slot', TRUE, NULL, 2.0); 
 
 
 
