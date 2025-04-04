@@ -6,7 +6,10 @@ import { HiShoppingBag } from "react-icons/hi2";
 import { Rating } from 'react-simple-star-rating'
 import Link from 'next/link';
 
+
+
 function GridCard(props) {
+
   return (
     <div className='bg-black/40 grid grid-cols-[115px_1fr_120px] grid-rows-1 rounded-[20px] p-4 text-[var(--text-color)] w-full h-[180px] hover:shadow-lg transition-all duration-200'>
       <div className='col-span-1 flex items-center justify-center'>
@@ -25,19 +28,19 @@ function GridCard(props) {
         <div className='mt-2'>
           <div className='ml-4 grid grid-cols-2 grid-rows-3 gap-y-1 gap-x-2'>
             <div className='text-base'>
-              <span className='font-medium'>Core Clock: </span>{props.data.core_clock}GHz
+              <span className='font-medium'>Core Clock: </span>{props.data.base_clock} GHz
             </div>
             <div className='text-base'>
-              <span className='font-medium'>Boost: </span>{props.data.boost_clock}GHz
+              <span className='font-medium'>Boost: </span>{props.data.boost_clock} GHz
             </div>
             <div className='text-base'>
               <span className='font-medium'>Cores: </span>{props.data.core_count}
             </div>
             <div className='text-base'>
-              <span className='font-medium'>TDP: </span>{props.data.tdp}W
+              <span className='font-medium'>TDP: </span>{props.data.TDP} W
             </div>
             <div className='text-base col-span-2 truncate'>
-              <span className='font-medium'>Graphics: </span>{props.data.graphics || 'None'}
+              <span className='font-medium'>Graphics: </span>{props.data.integrated_gpu || 'None'}
             </div>
           </div>
         </div>
@@ -59,13 +62,14 @@ function GridCard(props) {
         </div>
         
         <div className='flex flex-col gap-2 w-full'>
-          <button 
+          <Link 
+            href={'/products/' + props.data.id}
             className='bg-green-600 hover:bg-green-700 text-white rounded-[10px] w-full h-[35px] flex items-center justify-center transition-colors duration-200'
             aria-label="Buy now"
           >
             <HiShoppingBag className='mr-1' />
             <span className='text-sm'>Buy Now</span>
-          </button>
+          </Link>
           
           <Link href={{pathname: '/builder'}} className='w-full'>
             <button 

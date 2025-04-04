@@ -2,181 +2,35 @@
 
 import React, {useState} from 'react'
 import styles from '../page.module.css';
-import FilterSidebar from '@/components/FilterSidebar/FilterSidebar';
 import GridCard from './GridCard';
 
 import { FaSort} from "react-icons/fa";
 import { RiGridFill, RiListUnordered } from "react-icons/ri";
 
 
-
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import FilterBox from '@/components/FliterBox/FilterBox';
 
 function CpuPage() {
 
-  const ProductData = [
-    {
-      id: 'A1B2C3',
-      name: 'AMD Ryzen 7 7800X3D',
-      core_count: 8,
-      core_clock: 4.2,
-      boost_clock: 5,
-      graphics: 'Radeon',
-      price: 339,
-      rating: 4.5,
-      tdp: 120
-    },
-    {
-      id: 'D4E5F6',
-      name: 'Intel Core i9-12900K',
-      core_count: 16,
-      core_clock: 3.9,
-      boost_clock: 5.2,
-      graphics: 'Intel UHD 770',
-      price: 589,
-      rating: 4.7,
-      tdp: 125
-    },
-    {
-      id: 'G7H8I9',
-      name: 'AMD Ryzen 5 7600X',
-      core_count: 6,
-      core_clock: 4.7,
-      boost_clock: 5.3,
-      graphics: 'Radeon',
-      price: 299,
-      rating: 4.6,
-      tdp: 105
-    },
-    {
-      id: 'J1K2L3',
-      name: 'Intel Core i7-13700K',
-      core_count: 12,
-      core_clock: 3.4,
-      boost_clock: 5.4,
-      graphics: 'Intel UHD 770',
-      price: 419,
-      rating: 4.8,
-      tdp: 125
-    },
-    {
-      id: 'M4N5O6',
-      name: 'AMD Ryzen 9 7950X',
-      core_count: 16,
-      core_clock: 4.5,
-      boost_clock: 5.7,
-      graphics: 'Radeon',
-      price: 699,
-      rating: 4.9,
-      tdp: 170
-    },
-    {
-      id: 'P7Q8R9',
-      name: 'Intel Core i5-12600K',
-      core_count: 10,
-      core_clock: 3.7,
-      boost_clock: 4.9,
-      graphics: 'Intel UHD 770',
-      price: 289,
-      rating: 4.4,
-      tdp: 125
-    },
-    {
-      id: 'S1T2U3',
-      name: 'AMD Ryzen 3 5300G',
-      core_count: 4,
-      core_clock: 4.0,
-      boost_clock: 4.2,
-      graphics: 'Radeon',
-      price: 149,
-      rating: 4.2,
-      tdp: 65
-    },
-    {
-      id: 'V4W5X6',
-      name: 'Intel Core i3-12100',
-      core_count: 4,
-      core_clock: 3.3,
-      boost_clock: 4.3,
-      graphics: 'Intel UHD 730',
-      price: 129,
-      rating: 4.3,
-      tdp: 60
-    },
-    {
-      id: 'Y7Z8A9',
-      name: 'AMD Ryzen 9 5900X',
-      core_count: 12,
-      core_clock: 3.7,
-      boost_clock: 4.8,
-      graphics: 'None',
-      price: 549,
-      rating: 4.7,
-      tdp: 105
-    },
-    {
-      id: 'B1C2D3',
-      name: 'Intel Core i9-13900KS',
-      core_count: 24,
-      core_clock: 3.2,
-      boost_clock: 6.0,
-      graphics: 'Intel UHD 770',
-      price: 739,
-      rating: 5.0,
-      tdp: 150
-    },
-    {
-      id: 'E4F5G6',
-      name: 'AMD Ryzen 5 5600X',
-      core_count: 6,
-      core_clock: 3.7,
-      boost_clock: 4.6,
-      graphics: 'None',
-      price: 199,
-      rating: 4.5,
-      tdp: 65
-    },
-    {
-      id: 'H7I8J9',
-      name: 'Intel Core i7-11700K',
-      core_count: 8,
-      core_clock: 3.6,
-      boost_clock: 5.0,
-      graphics: 'Intel UHD 750',
-      price: 399,
-      rating: 4.6,
-      tdp: 125
-    },
-    {
-      id: 'K1L2M3',
-      name: 'AMD Ryzen 7 5700G',
-      core_count: 8,
-      core_clock: 3.8,
-      boost_clock: 4.6,
-      graphics: 'Radeon',
-      price: 299,
-      rating: 4.5,
-      tdp: 65
-    },
-    {
-      id: 'N4O5P6',
-      name: 'Intel Core i5-13400F',
-      core_count: 10,
-      core_clock: 2.5,
-      boost_clock: 4.6,
-      graphics: 'None',
-      price: 219,
-      rating: 4.4,
-      tdp: 65
-    }
-  ];
-
+  const ProductData = [{"id":"7X2a9Bq","name":"Intel Core i9-14900K","price":599.99,"rating":4.8,"base_clock":3.2,"boost_clock":6,"TDP":125,"core_count":24,"integrated_gpu":"Intel UHD Graphics 770"},{"id":"9Bq7X2a","name":"Intel Core i7-13700K","price":409.99,"rating":4.7,"base_clock":3.4,"boost_clock":5.4,"TDP":125,"core_count":20,"integrated_gpu":"Intel UHD Graphics 770"},{"id":"A1b2C3d","name":"AMD Ryzen 9 7950X3D","price":649.99,"rating":4.9,"base_clock":4.2,"boost_clock":5.7,"TDP":120,"core_count":16,"integrated_gpu":"AMD Radeon Graphics"},{"id":"a9B8c7D","name":"Intel Core i5-13600K","price":309.99,"rating":4.6,"base_clock":3.4,"boost_clock":5.1,"TDP":125,"core_count":14,"integrated_gpu":"Intel UHD Graphics 770"},{"id":"d3C2b1A","name":"AMD Ryzen 7 7700X","price":339.99,"rating":4.6,"base_clock":4.2,"boost_clock":5,"TDP":105,"core_count":8,"integrated_gpu":"AMD Radeon Graphics"},{"id":"jK9lM0n","name":"AMD Ryzen 5 7600X","price":249.99,"rating":4.5,"base_clock":4.7,"boost_clock":5.3,"TDP":105,"core_count":6,"integrated_gpu":"AMD Radeon Graphics"}];
   const [slice, setSlice] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [priceRange, setPriceRange] = React.useState([0, 1000]);
+  const [tdpRange, setTdpRange] = React.useState([0, 300]);
+  const [rating, setRating] = React.useState(0);
+  const [brandsSelected, setBrandsSelected] = React.useState(["Apple", "Samsung", "Sony", "LG", "Amazon Basics"]);
+
+  const brands = ["Apple", "Samsung", "Sony", "LG", "Amazon Basics"];
+
+  function handleFilterBox() {
+    setIsOpen(!isOpen);
+  }
 
   return (
     <div>
       <div className={styles.pageCategoriesSection} data-theme='dark'>
-        <FilterSidebar/>
         <div className='flex-grow mx-10'>  
           <center className='font-bold text-4xl mb-8'>
             <span>
@@ -195,6 +49,29 @@ function CpuPage() {
               <FaSort className='mr-2'/>
               <span>Sort By</span>
             </button>
+            <button 
+              className='bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 flex items-center transition-colors duration-200'
+              onClick={handleFilterBox}
+            >
+              <span>Filter By</span>
+              <FaSort className='ml-2'/>
+            </button>
+              <div className='absolute top-[34%] right-[37%] z-50'>
+                <FilterBox
+                  priceRange={priceRange}
+                  setPriceRange={setPriceRange}
+                  tdpRange={tdpRange}
+                  setTdpRange={setTdpRange}
+                  rating={rating}
+                  setRating={setRating}
+                  brands={brands}
+                  brandsSelected={brandsSelected}
+                  setBrandsSelected={setBrandsSelected}
+                  isOpen={isOpen}
+                  setIsOpen={setIsOpen}
+                />
+              </div>
+
             <button className='bg-gray-700 hover:bg-gray-600 text-white rounded-md px-3 py-2 flex items-center transition-colors duration-200'>
               <RiListUnordered className='mr-2'/>
               <span>List</span>
