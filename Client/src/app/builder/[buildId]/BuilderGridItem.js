@@ -1,8 +1,10 @@
 import React from 'react';
 import { RxCrossCircled, RxCheckCircled } from "react-icons/rx";
+import { FaPlus } from "react-icons/fa";
 import styles from './page.module.css';
+import Link from 'next/link';
 
-function BuilderGridItem({isItem, itemData}) {
+function BuilderGridItem({isItem, itemData, buildId}) {
 
   function handleBuy(id){
     console.log(id);
@@ -26,9 +28,12 @@ function BuilderGridItem({isItem, itemData}) {
         </div>
         :
         <div className='border-r-2 border-white py-1 pr-2 mr-2 text-center'>
-          <button className='h-full w-full mr-4 text-left hover:bg-green-700 transition-colors duration-200 rounded'>
-            Add item 
-          </button>
+          <Link href={`/products/${itemData.type.toLowerCase()}?buildId=${buildId}`} className='text-inherit '>
+            <button className='pl-3 h-full w-full mr-4 text-left hover:bg-green-700 transition-colors duration-200 rounded'>
+              <FaPlus className='inline-block mr-2'/>
+              Add item 
+            </button>
+          </Link>
         </div>
       }
       

@@ -57,14 +57,13 @@ INSERT INTO `CPU` (`id`, `base_clock`, `boost_clock`, `TDP`, `core_count`, `thre
 
 
 
-INSERT INTO `GPU` (`id`, `VRAM`, `base_clock`, `boost_clock`, `cuda_cores`, `rt_cores`, `TDP`, `PCIE_gen`, `Form_Factor`, `RT_enabled`, `DLSS_version`, `FSR_version`) VALUES
-('z8K3pD1', 24, 2.23, 2.52, 16384, 128, 450, 4.0, 'Triple Slot', TRUE, 3.0, NULL),
-('E4f5G6h', 24, 1.9, 2.5, 6144, 96, 355, 4.0, 'Dual Slot', TRUE, NULL, 3.0),
-('pQ3r4S5', 12, 2.31, 2.61, 7680, 60, 285, 4.0, 'Dual Slot', TRUE, 3.0, NULL),
-('D1z8K3p', 16, 1.7, 2.3, 3840, 60, 300, 4.0, 'Dual Slot', TRUE, NULL, 2.0),
-('h6G5f4E', 10, 1.4, 1.7, 8704, 68, 320, 4.0, 'Dual Slot', TRUE, 2.0, NULL),
-('e6F5g4H', 12, 2.3, 2.6, 2560, 40, 230, 4.0, 'Dual Slot', TRUE, NULL, 2.0); 
-
+INSERT INTO `GPU` (`id`, `VRAM`, `base_clock`, `boost_clock`, `cuda_cores`, `rt_cores`, `TDP`, `PCIE_gen`, `Form_Factor`, `RT_enabled`, `DLSS_version`, `FSR_version`, `vram_version`) VALUES
+('z8K3pD1', 24, 2.23, 2.52, 16384, 128, 450, 4.0, 'Triple Slot', TRUE, 3.0, NULL, 'GDDR6X'),
+('E4f5G6h', 24, 1.9, 2.5, 6144, 96, 355, 4.0, 'Dual Slot', TRUE, NULL, 3.0, 'GDDR6'),
+('pQ3r4S5', 12, 2.31, 2.61, 7680, 60, 285, 4.0, 'Dual Slot', TRUE, 3.0, NULL, 'GDDR6X'),
+('D1z8K3p', 16, 1.7, 2.3, 3840, 60, 300, 4.0, 'Dual Slot', TRUE, NULL, 2.0, 'GDDR6'),
+('h6G5f4E', 10, 1.4, 1.7, 8704, 68, 320, 4.0, 'Dual Slot', TRUE, 2.0, NULL, 'GDDR6'),
+('e6F5g4H', 12, 2.3, 2.6, 2560, 40, 230, 4.0, 'Dual Slot', TRUE, NULL, 2.0, 'GDDR6');
 
 
 INSERT INTO `memory` (`id`, `generation`, `amount`, `size`, `speed`) VALUES

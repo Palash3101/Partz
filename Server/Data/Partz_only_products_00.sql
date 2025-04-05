@@ -11,27 +11,37 @@ CREATE TABLE `products` (
     PRIMARY KEY(`id`)
 );
 
+CREATE TABLE `product_type_lookup` (
+    `product_type_id` CHAR(7) NOT NULL UNIQUE,
+    `product_type_name` VARCHAR(255),
+    PRIMARY KEY(`product_type_id`)
+);
+
+CREATE TABLE `retailer_links` (
+	`product_id` CHAR(7) NOT NULL,
+	`amazon_link` VARCHAR(255),
+	`primeabgb_link` VARCHAR(255),
+	`manufacturer_link` VARCHAR(255),
+	PRIMARY KEY(`product_id`)
+);
+
 CREATE TABLE `Builder` (
     `build_id` CHAR(7) NOT NULL UNIQUE,
     `Name` VARCHAR(255),
     `price` FLOAT,
-    `cpu_id` CHAR(1),
-    `memory_id` CHAR(1),
+    `cpu_id` CHAR(7),
+    `memory_id` CHAR(7),
     `memory_amt` INT,
-    `power_supply_id` CHAR(1),
-    `motherboard_id` CHAR(1),
-    `operating_system_id` CHAR(1),
+    `power_supply_id` CHAR(7),
+    `motherboard_id` CHAR(7),
+    `operating_system_id` CHAR(2),
     PRIMARY KEY(`build_id`)
 );
 
 CREATE INDEX `Builder_index_0`
 ON `Builder` (`build_id`);
 
-CREATE TABLE `product_type_lookup` (
-    `product_type_id` CHAR(7) NOT NULL UNIQUE,
-    `product_type_name` VARCHAR(255),
-    PRIMARY KEY(`product_type_id`)
-);
+
 
 CREATE TABLE `CPU` (
     `id` CHAR(7) NOT NULL UNIQUE,
@@ -51,7 +61,7 @@ CREATE INDEX `CPU_index_0`
 ON `CPU` (`id`);
 
 CREATE TABLE `OS_lookups` (
-    `id` CHAR(1) NOT NULL UNIQUE,
+    `id` CHAR(2) NOT NULL UNIQUE,
     `name` VARCHAR(255),
     `price` FLOAT,
     `manufacturer_name` VARCHAR(255),
@@ -59,19 +69,20 @@ CREATE TABLE `OS_lookups` (
 );
 
 CREATE TABLE `GPU` (
-    `id` CHAR(7) NOT NULL UNIQUE,
-    `VRAM` INT,
-    `base_clock` FLOAT,
-    `boost_clock` FLOAT,
-    `cuda_cores` INT,
-    `rt_cores` INT,
-    `TDP` INT,
-    `PCIE_gen` FLOAT,
-    `Form_Factor` VARCHAR(255),
-    `RT_enabled` BOOLEAN,
-    `DLSS_version` FLOAT,
-    `FSR_version` FLOAT,
-    PRIMARY KEY(`id`)
+	`id` CHAR(7) NOT NULL UNIQUE,
+	`vram` INT,
+	`base_clock` FLOAT,
+	`boost_clock` FLOAT,
+	`cuda_cores` INT,
+	`rt_cores` INT,
+	`TDP` INT,
+	`PCIE_gen` DECIMAL,
+	`Form_Factor` VARCHAR(255),
+	`RT_enabled` BOOLEAN,
+	`DLSS_version` DECIMAL,
+	`FSR_version` DECIMAL,
+	`vram_version` VARCHAR(7),
+	PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `motherboard` (
@@ -151,6 +162,9 @@ CREATE TABLE `storage` (
 
 ALTER TABLE `products`
 ADD FOREIGN KEY(`product_type_id`) REFERENCES `product_type_lookup`(`product_type_id`)
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE `retailer_links`
+ADD FOREIGN KEY(`product_id`) REFERENCES `products`(`id`)
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE `Builder`
 ADD FOREIGN KEY(`operating_system_id`) REFERENCES `OS_lookups`(`id`)

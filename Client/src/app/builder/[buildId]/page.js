@@ -1,68 +1,39 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import styles from './page.module.css';
 import BuilderGridItem from './BuilderGridItem';
 
-function Builder() {
-  const buildLink = 'axbyz';
+function Builder({params}) {
+  const buildId  = use(params).buildId;
+
   const [estimatedwattage, setEstimatedwattage] = useState(0);
   const [price, setPrice] = useState(0);
 
   const list = [
     {
       type: "Motherboard",
-      id: "X9Y3Z7",
-      img: "https://example.com/motherboard.jpg",
-      name: "ASUS ROG STRIX B550-F",
-      price: 179.99,
-      wattage: 65,
-      is: true
+      data:null
     },
     {
       type: "CPU",
-      id: "M2N8P5",
-      img: "https://example.com/cpu.jpg",
-      name: "Intel Core i7-12700K",
-      price: 349.99,
-      wattage: 125,
-      is: true
+      data:null
     },
     {
       type: "GPU",
-      id: "Q4R1S6",
-      img: "https://example.com/gpu.jpg",
-      name: "NVIDIA GeForce RTX 3070",
-      price: 499.99,
-      wattage: 220,
-      is: true
+      data:null
     },
     {
       type: "Power Supply",
-      id: "A1B6C4",
-      img: "https://example.com/psu.jpg",
-      name: "Corsair RM850x",
-      price: 129.99,
-      wattage: 850,
-      is: true
+      data:null
     },
     {
       type: "Storage",
-      id: "D3E7F9",
-      img: "https://example.com/storage.jpg",
-      name: "Samsung 970 EVO Plus 1TB",
-      price: 109.99,
-      wattage: 6,
-      is: true
+      data:null
     },
     {
       type: "Memory",
-      id: "G2H5J8",
-      img: "https://example.com/memory.jpg",
-      name: "Corsair Vengeance LPX 16GB",
-      price: 74.99,
-      wattage: 10,
-      is: true
+      data:null
     }
   ];
 
@@ -89,7 +60,7 @@ function Builder() {
         <div className='flex justify-between bg-black/40 mx-auto my-7 p-4 h-[10vh] rounded-[20px] w-[90%]'>
           <div className='flex'>
             <div className='bg-white/40 p-2 rounded-[20px] w-[200px] text-center align-middle text-xl'>
-              {buildLink}
+              {buildId}
             </div>
 
             <button className='ml-5'>
@@ -122,6 +93,7 @@ function Builder() {
                   key={index}
                   isItem={item.id ? true : false} 
                   itemData={item}
+                  buildId={buildId}
                 />
               );
             })

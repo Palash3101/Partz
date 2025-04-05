@@ -21,6 +21,7 @@ function GridCard(props) {
 
   }
 
+
   return (
     <div className='bg-black/40 grid grid-cols-[115px_1fr_120px] grid-rows-1 rounded-[20px] p-4 text-[var(--text-color)] w-full h-[180px] hover:shadow-lg transition-all duration-200'>
       <div className='col-span-1 flex items-center justify-center'>
@@ -78,7 +79,7 @@ function GridCard(props) {
             <span className='text-sm'>Buy Now</span>
           </Link>
           
-          <Link href={{pathname: '/builder'}} className='w-full'>
+          <Link href={{pathname: `/builder/${props.buildId}`}} className='w-full'>
             <button 
               className='bg-blue-500 hover:bg-blue-600 text-white rounded-[10px] w-full h-[35px] flex items-center justify-center transition-colors duration-200'
               aria-label="Add to PC build"

@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react'
 import styles from '../page.module.css';
-
+import { useSearchParams } from 'next/navigation';
 
 import { FaSort} from "react-icons/fa";
 import { RiGridFill, RiListUnordered } from "react-icons/ri";
@@ -13,6 +13,7 @@ import FilterBox from '@/components/DropBox/FilterBox';
 import SortBox from '@/components/DropBox/SortBox';
 
 function CpuPage() {
+  const buildId = useSearchParams().get('buildId');
 
   const [ProductData, setProductsData] = useState([]);
   const [slice, setSlice] = useState(0);
@@ -36,7 +37,6 @@ function CpuPage() {
       setProductsData(data);
     })
   }, [])
-
 
 
   return (
@@ -108,6 +108,7 @@ function CpuPage() {
                 <GridCard 
                   key={index}
                   data={data}
+                  buildId={buildId}
                 />
               ))
             }
