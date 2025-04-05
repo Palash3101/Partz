@@ -23,9 +23,8 @@ const PCComponentShowcase = () => {
     },
     retailers: [
       { name: "Amazon", price: 599.99, stock: "In Stock" },
-      { name: "Newegg", price: 579.99, stock: "In Stock" },
-      { name: "Best Buy", price: 609.99, stock: "Limited Stock" },
-      { name: "Micro Center", price: 569.99, stock: "Out of Stock" }
+      { name: "PrimeABGB", price: 589.99, stock: "In Stock" },
+      { name: "AMD", price: 619.99, stock: "In Stock" }
     ]
   }
 
@@ -52,7 +51,7 @@ const PCComponentShowcase = () => {
             <div className="grid grid-cols-2 gap-2">
               {Object.entries(product.specs).map(([key, value]) => (
                 <div key={key} className="flex">
-                  <span className="font-bold text-xl" data-theme="dark">{key}:</span>
+                  <span className="font-bold text-xl" data-theme="dark">{key.split('_')}:</span>
                   <span className="text-lg ml-3">{value}</span>
                 </div>
               ))}

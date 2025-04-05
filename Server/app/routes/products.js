@@ -1,18 +1,35 @@
 const express = require('express');
 const { pool } = require('../database.js');
 const { default: getTypeQuery } = require('../services/getTypeQuery.js');
+const { default: checkType } = require('../services/structureOutput.js');
+const { default: reformatProductOutput } = require('../services/reformatProductOutput.js');
 
 const router = express.Router();
 
 router.get('/cpu', async (req, res) => {
-  const data = await pool.query('SELECT products.id, name, price, rating, base_clock, boost_clock, TDP,core_count, integrated_gpu  FROM cpu, products WHERE cpu.id = products.id')
-  res.send(data[0]);
+  let data = await pool.query('SELECT products.id, name, price, rating, base_clock, boost_clock, TDP,core_count, integrated_gpu  FROM cpu, products WHERE cpu.id = products.id')
+  
+  data = data[0].map((item) => {
+    return reformatProductOutput(item)
+  })
+
+  res.send(data);
 });
 
 
 router.get('/gpu', async (req, res) => {
-  const data = await pool.query('SELECT products.id, name, price, rating, vram_version, vram, DLSS_version, FSR_version, TDP, boost_clock, cuda_cores, RT_enabled FROM gpu, products WHERE gpu.id = products.id')
-  res.send(data[0]);
+  let data = await pool.query('SELECT products.id, name, price, rating, vram_version, vram, DLSS_version, FSR_version, TDP, boost_clock, cuda_cores, RT_enabled FROM gpu, products WHERE gpu.id = products.id')
+  
+  data = data[0].map((item) => {
+    item = reformatProductOutput(item)
+    let x = item.specs.vram + 'GB '+ item.specs.vram_version
+    delete item.specs.vram_version
+    delete item.specs.vram
+    item.specs.vram = x
+    return item
+  })
+  
+  res.send(data);
 });
 
 router.get('/:productId', async (req, res)=>{
@@ -22,7 +39,13 @@ router.get('/:productId', async (req, res)=>{
   product_type  =data[0][0].product_type_name
 
   data = await pool.query(getTypeQuery(product_type, product_id))
-  res.send(data[0][0]);
+  data = data[0][0]
+
+  data.product_type = product_type
+
+  data = checkType(data)
+
+  res.send(data);
 });
 
 

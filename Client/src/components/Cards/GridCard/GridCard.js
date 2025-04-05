@@ -9,6 +9,18 @@ import Link from 'next/link';
 
 
 function GridCard(props) {
+  function printValue(key, value) {
+    if (value===null || value===undefined) return 'N/A';
+    if (key==='tdp') return value + ' W';
+    if (key.split('_')[1] === 'clock') return value + ' GHz';
+
+    if (key=='rt_enabled' && value===1) return 'Yes';
+    else if (key=='rt_enabled' && value===0) return 'No';
+    
+    console.log();
+    return value;
+
+  }
 
   return (
     <div className='bg-black/40 grid grid-cols-[115px_1fr_120px] grid-rows-1 rounded-[20px] p-4 text-[var(--text-color)] w-full h-[180px] hover:shadow-lg transition-all duration-200'>
@@ -25,26 +37,22 @@ function GridCard(props) {
           <div className='font-bold text-xl grow ml-4 truncate'>{props.data.name}</div>
         </Link>
 
-        <div className='mt-2'>
-          <div className='ml-4 grid grid-cols-2 grid-rows-3 gap-y-1 gap-x-2'>
-            <div className='text-base'>
-              <span className='font-medium'>Core Clock: </span>{props.data.core_clock}GHz
-            </div>
-            <div className='text-base'>
-              <span className='font-medium'>Boost: </span>{props.data.boost_clock}GHz
-            </div>
-            <div className='text-base'>
-              <span className='font-medium'>Cores: </span>{props.data.core_count}
-            </div>
-            <div className='text-base'>
-              <span className='font-medium'>TDP: </span>{props.data.tdp}W
-            </div>
-            <div className='text-base col-span-2 truncate'>
-              <span className='font-medium'>Graphics: </span>{props.data.graphics || 'None'}
+        <div className='mt-2 ml-4 grid grid-cols-2 grid-rows-3 w-full h-[60%]'>
+
+        {
+        Object.entries(props.data.specs).map(([key, value], index) => (
+          
+          <div key={index}className={index===Object.entries(props.data.specs).length-1 ? 'col-span-2' : 'col-span-1'}>
+            <div className='w-auto h-auto p-none m-none' >
+              <span className='text-m font-[700]'>{key.toLocaleUpperCase()} : </span>
+              <span className='text-m'>{printValue(key.toLowerCase(), value)}</span>
             </div>
           </div>
+        )) 
+        }
         </div>
-      </div>
+        </div>
+
 
       <div className='flex flex-col justify-between border-l border-gray-600/30 pl-4'>
         <div className='flex flex-col items-center'>
@@ -84,6 +92,6 @@ function GridCard(props) {
       </div>
     </div>
   );
-}
 
+}
 export default GridCard;

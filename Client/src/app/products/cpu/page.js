@@ -2,18 +2,18 @@
 
 import React, {useState} from 'react'
 import styles from '../page.module.css';
-import GridCard from './GridCard';
+
 
 import { FaSort} from "react-icons/fa";
 import { RiGridFill, RiListUnordered } from "react-icons/ri";
-
+import GridCard from '@/components/Cards/GridCard/GridCard';
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import FilterBox from '@/components/FliterBox/FilterBox';
 
 function CpuPage() {
 
-  const ProductData = [{"id":"7X2a9Bq","name":"Intel Core i9-14900K","price":599.99,"rating":4.8,"base_clock":3.2,"boost_clock":6,"TDP":125,"core_count":24,"integrated_gpu":"Intel UHD Graphics 770"},{"id":"9Bq7X2a","name":"Intel Core i7-13700K","price":409.99,"rating":4.7,"base_clock":3.4,"boost_clock":5.4,"TDP":125,"core_count":20,"integrated_gpu":"Intel UHD Graphics 770"},{"id":"A1b2C3d","name":"AMD Ryzen 9 7950X3D","price":649.99,"rating":4.9,"base_clock":4.2,"boost_clock":5.7,"TDP":120,"core_count":16,"integrated_gpu":"AMD Radeon Graphics"},{"id":"a9B8c7D","name":"Intel Core i5-13600K","price":309.99,"rating":4.6,"base_clock":3.4,"boost_clock":5.1,"TDP":125,"core_count":14,"integrated_gpu":"Intel UHD Graphics 770"},{"id":"d3C2b1A","name":"AMD Ryzen 7 7700X","price":339.99,"rating":4.6,"base_clock":4.2,"boost_clock":5,"TDP":105,"core_count":8,"integrated_gpu":"AMD Radeon Graphics"},{"id":"jK9lM0n","name":"AMD Ryzen 5 7600X","price":249.99,"rating":4.5,"base_clock":4.7,"boost_clock":5.3,"TDP":105,"core_count":6,"integrated_gpu":"AMD Radeon Graphics"}];
+  const ProductData = [{"id":"7X2a9Bq","name":"Intel Core i9-14900K","price":599.99,"rating":4.8,"specs":{"base_clock":3.2,"boost_clock":6,"TDP":125,"core_count":24,"integrated_gpu":"Intel UHD Graphics 770"}},{"id":"9Bq7X2a","name":"Intel Core i7-13700K","price":409.99,"rating":4.7,"specs":{"base_clock":3.4,"boost_clock":5.4,"TDP":125,"core_count":20,"integrated_gpu":"Intel UHD Graphics 770"}},{"id":"A1b2C3d","name":"AMD Ryzen 9 7950X3D","price":649.99,"rating":4.9,"specs":{"base_clock":4.2,"boost_clock":5.7,"TDP":120,"core_count":16,"integrated_gpu":"AMD Radeon Graphics"}},{"id":"a9B8c7D","name":"Intel Core i5-13600K","price":309.99,"rating":4.6,"specs":{"base_clock":3.4,"boost_clock":5.1,"TDP":125,"core_count":14,"integrated_gpu":"Intel UHD Graphics 770"}},{"id":"d3C2b1A","name":"AMD Ryzen 7 7700X","price":339.99,"rating":4.6,"specs":{"base_clock":4.2,"boost_clock":5,"TDP":105,"core_count":8,"integrated_gpu":"AMD Radeon Graphics"}},{"id":"jK9lM0n","name":"AMD Ryzen 5 7600X","price":249.99,"rating":4.5,"specs":{"base_clock":4.7,"boost_clock":5.3,"TDP":105,"core_count":6,"integrated_gpu":"AMD Radeon Graphics"}}];
   const [slice, setSlice] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
