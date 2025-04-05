@@ -16,8 +16,7 @@ function GridCard(props) {
 
     if (key=='rt_enabled' && value===1) return 'Yes';
     else if (key=='rt_enabled' && value===0) return 'No';
-    
-    console.log();
+
     return value;
 
   }

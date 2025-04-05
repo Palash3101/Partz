@@ -1,5 +1,5 @@
 'use client';
-import FilterBox from '@/components/FliterBox/FilterBox';
+import FilterBox from '@/components/DropBox/FilterBox';
 import React, { useState, useEffect } from 'react';
 
 

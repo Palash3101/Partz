@@ -34,18 +34,24 @@ router.get('/gpu', async (req, res) => {
 
 router.get('/:productId', async (req, res)=>{
   product_id = req.params.productId
-  let data = await pool.query('SELECT id, product_type_name FROM products, product_type_lookup WHERE id = ? and products.product_type_id = product_type_lookup.product_type_id;', [product_id])
+  try{
+    let data = await pool.query('SELECT id, product_type_name FROM products, product_type_lookup WHERE id = ? and products.product_type_id = product_type_lookup.product_type_id;', [product_id])
+    product_type  =data[0][0].product_type_name
   
-  product_type  =data[0][0].product_type_name
-
-  data = await pool.query(getTypeQuery(product_type, product_id))
-  data = data[0][0]
-
-  data.product_type = product_type
-
-  data = checkType(data)
-
-  res.send(data);
+    data = await pool.query(getTypeQuery(product_type, product_id))
+    data = data[0][0]
+  
+    data.product_type = product_type
+  
+    data = checkType(data)
+  
+    res.send(data);
+  }
+  catch(err){
+    res.status(404).send('Product not found')
+    return
+  }
+  
 });
 
 

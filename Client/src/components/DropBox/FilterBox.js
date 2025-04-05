@@ -18,8 +18,8 @@ function FilterBox({priceRange, setPriceRange,tdpRange, setTdpRange, rating, set
   return (
     <div>
       { isOpen &&
-        <div className="w-[300px] top-full left-0 right-0 mt-1 bg-black/80 border rounded-[20px] shadow-lg p-3 text-white">
-          <div className="flex justify-end mb-2">
+        <div className="w-[300px] h-[415px] mt-1 bg-black/80 border rounded-[20px] rounded-bl-none rounded-tl-none shadow-lg p-3 text-white">
+          <div className="flex justify-start mb-2">
             <button 
               onClick={clearFilters}
               className="text-blue-400 hover:text-blue-300 text-sm"

@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styles from '../page.module.css';
 
 
@@ -9,11 +9,11 @@ import { RiGridFill, RiListUnordered } from "react-icons/ri";
 import GridCard from '@/components/Cards/GridCard/GridCard';
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
-import FilterBox from '@/components/FliterBox/FilterBox';
+import FilterBox from '@/components/DropBox/FilterBox';
 
-function CpuPage() {
+function GpuPage() {
 
-  const ProductData = [{"id":"D1z8K3p","name":"AMD Radeon RX 6800 XT","price":529.99,"rating":4.5,"specs":{"DLSS_version":null,"FSR_version":"2","TDP":300,"boost_clock":2.3,"cuda_cores":3840,"RT_enabled":1,"vram":"16GB GDDR6"}},{"id":"E4f5G6h","name":"AMD Radeon RX 7900 XTX","price":999.99,"rating":4.8,"specs":{"DLSS_version":null,"FSR_version":"3","TDP":355,"boost_clock":2.5,"cuda_cores":6144,"RT_enabled":1,"vram":"24GB GDDR6"}},{"id":"e6F5g4H","name":"AMD Radeon RX 6700 XT","price":399.99,"rating":4.4,"specs":{"DLSS_version":null,"FSR_version":"2","TDP":230,"boost_clock":2.6,"cuda_cores":2560,"RT_enabled":1,"vram":"12GB GDDR6"}},{"id":"h6G5f4E","name":"NVIDIA GeForce RTX 3080","price":699.99,"rating":4.6,"specs":{"DLSS_version":"2","FSR_version":null,"TDP":320,"boost_clock":1.7,"cuda_cores":8704,"RT_enabled":1,"vram":"10GB GDDR6"}},{"id":"pQ3r4S5","name":"NVIDIA GeForce RTX 4070 Ti","price":799.99,"rating":4.6,"specs":{"DLSS_version":"3","FSR_version":null,"TDP":285,"boost_clock":2.61,"cuda_cores":7680,"RT_enabled":1,"vram":"12GB GDDR6X"}},{"id":"z8K3pD1","name":"NVIDIA GeForce RTX 4090","price":1599.99,"rating":4.9,"specs":{"DLSS_version":"3","FSR_version":null,"TDP":450,"boost_clock":2.52,"cuda_cores":16384,"RT_enabled":1,"vram":"24GB GDDR6X"}}];
+  const [ProductData, setProductsData] = useState([]);
   const [slice, setSlice] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,6 +23,16 @@ function CpuPage() {
   const [brandsSelected, setBrandsSelected] = React.useState(["Apple", "Samsung", "Sony", "LG", "Amazon Basics"]);
 
   const brands = ["Apple", "Samsung", "Sony", "LG", "Amazon Basics"];
+
+  useEffect(() => {
+    fetch('http://localhost:3100/products/gpu').then
+    ((response)=> response.json()).then
+    ((data) => {
+      setProductsData(data);
+    })
+  }, [])
+  
+
 
   function handleFilterBox() {
     setIsOpen(!isOpen);
@@ -128,4 +138,4 @@ function CpuPage() {
 
 
 
-export default CpuPage;
+export default GpuPage;
