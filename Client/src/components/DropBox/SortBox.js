@@ -1,15 +1,24 @@
+import sorter from '@/services/sorter';
 import React, { useState } from 'react';
 
-function SortBox({ isOpen, setIsOpen, selectedOption, setSelectedOption }) {
+function SortBox({ isOpen, setIsOpen, data, setData }) {
 
+  const [selectedOption, setSelectedOption] = useState('Featured');
   
   const options = [
     'Featured',
     'Price: Low to High',
     'Price: High to Low',
-    'Avg. Customer Review',
+    'Rating: High to Low',
+    'Rating: Low to High',
   ];
   
+
+  function apply_sort(){
+    setIsOpen(false);
+    const new_data = sorter(selectedOption, data);
+    setData(new_data);
+  }
 
 
   return (
@@ -38,7 +47,7 @@ function SortBox({ isOpen, setIsOpen, selectedOption, setSelectedOption }) {
         
         <button 
           className="mt-1 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
-          onClick={() => setIsOpen(false)}  
+          onClick={apply_sort}  
         >
           Apply Sort
         </button>

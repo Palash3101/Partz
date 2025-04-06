@@ -11,6 +11,7 @@ import GridCard from '@/components/Cards/GridCard/GridCard';
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import FilterBox from '@/components/DropBox/FilterBox';
 import SortBox from '@/components/DropBox/SortBox';
+import ProductsSubmenu from '@/components/ui/ProductsSubmenu';
 
 function CpuPage() {
   const buildId = useSearchParams().get('buildId');
@@ -20,12 +21,8 @@ function CpuPage() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
 
-  const [priceRange, setPriceRange] = React.useState([0, 1000]);
-  const [tdpRange, setTdpRange] = React.useState([0, 300]);
-  const [rating, setRating] = React.useState(0);
   const [brandsSelected, setBrandsSelected] = React.useState(["Apple", "Samsung", "Sony", "LG", "Amazon Basics"]);
 
-  const [selectedOption, setSelectedOption] = useState('Featured');
 
   const brands = ["Apple", "Samsung", "Sony", "LG", "Amazon Basics"];
 
@@ -65,10 +62,10 @@ function CpuPage() {
             </button>
             <div className='absolute top-[264px] right-[762px] z-50'>
                 <SortBox
-                  selectedOption={selectedOption}
-                  setSelectedOption={setSelectedOption}
                   isOpen={isSortOpen}
                   setIsOpen={setIsSortOpen}
+                  data={ProductData}
+                  setData = {setProductsData}
                 />
               </div>
             <button 
@@ -80,17 +77,13 @@ function CpuPage() {
             </button>
               <div className='absolute top-[264px] right-[463px] z-50'>
                 <FilterBox
-                  priceRange={priceRange}
-                  setPriceRange={setPriceRange}
-                  tdpRange={tdpRange}
-                  setTdpRange={setTdpRange}
-                  rating={rating}
-                  setRating={setRating}
                   brands={brands}
                   brandsSelected={brandsSelected}
                   setBrandsSelected={setBrandsSelected}
                   isOpen={isFilterOpen}
                   setIsOpen={setIsFilterOpen}
+                  data={ProductData}
+                  setData={setProductsData}
                 />
               </div>
 

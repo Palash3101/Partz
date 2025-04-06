@@ -32,6 +32,21 @@ router.get('/gpu', async (req, res) => {
   res.send(data);
 });
 
+
+router.get('/motherboard', async (req, res) => {
+  let query_list = ['products.id','name', 'price', 'rating', 'socket', 'chipset', 'form_factor', ] 
+
+  let data = await pool.query('SELECT * FROM motherboard, products, memory_lookup, storage_lookup, ports_lookup WHERE motherboard.id = products.id')
+  
+  data = data[0].map((item) => {
+    item = reformatProductOutput(item)
+    return item
+  })
+  
+  res.send(data);
+});
+
+
 router.get('/:productId', async (req, res)=>{
   product_id = req.params.productId
   try{

@@ -2,8 +2,13 @@ import React from 'react';
 import { Rating } from 'react-simple-star-rating';
 import Slider from '@mui/material/Slider';
 import Checkbox from '@mui/material/Checkbox';
+import filter from '@/services/filter';
 
-function FilterBox({priceRange, setPriceRange,tdpRange, setTdpRange, rating, setRating, brands, setBrandsSelected, brandsSelected, isOpen, setIsOpen}) {
+function FilterBox({ brands, setBrandsSelected, brandsSelected, isOpen, setIsOpen, data, setData}) {
+
+  const [priceRange, setPriceRange] = React.useState([0, 2000]);
+  const [tdpRange, setTdpRange] = React.useState([0, 500]);
+  const [rating, setRating] = React.useState(0);
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -13,6 +18,12 @@ function FilterBox({priceRange, setPriceRange,tdpRange, setTdpRange, rating, set
     setPriceRange([0, 1000]);
     setTdpRange([0, 300]);
     setRating(0);
+  }
+
+  function applyFilter(){
+    setIsOpen(false);
+    const new_data = filter(data, priceRange, tdpRange, rating);
+    setData(new_data);
   }
 
   return (
@@ -35,7 +46,7 @@ function FilterBox({priceRange, setPriceRange,tdpRange, setTdpRange, rating, set
                 range={priceRange} 
                 setRange={setPriceRange} 
                 min={0} 
-                max={5000} 
+                max={2000} 
                 prefix="$" 
               />
             </div>
@@ -45,7 +56,7 @@ function FilterBox({priceRange, setPriceRange,tdpRange, setTdpRange, rating, set
                 range={tdpRange} 
                 setRange={setTdpRange} 
                 min={0} 
-                max={500} 
+                max={400} 
                 suffix="W" 
               />
             </div>
@@ -71,7 +82,7 @@ function FilterBox({priceRange, setPriceRange,tdpRange, setTdpRange, rating, set
           
           <button 
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
-            onClick={() => setIsOpen(false)}  
+            onClick={applyFilter}  
           >
             Apply Filters
           </button>

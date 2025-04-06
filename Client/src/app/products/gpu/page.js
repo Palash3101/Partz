@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react'
 import styles from '../page.module.css';
-
+import { useSearchParams } from 'next/navigation';
 
 import { FaSort} from "react-icons/fa";
 import { RiGridFill, RiListUnordered } from "react-icons/ri";
@@ -10,19 +10,20 @@ import GridCard from '@/components/Cards/GridCard/GridCard';
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import FilterBox from '@/components/DropBox/FilterBox';
+import SortBox from '@/components/DropBox/SortBox';
 
 function GpuPage() {
+  const buildId = useSearchParams().get('buildId');
 
   const [ProductData, setProductsData] = useState([]);
   const [slice, setSlice] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
-  const [priceRange, setPriceRange] = React.useState([0, 1000]);
-  const [tdpRange, setTdpRange] = React.useState([0, 300]);
-  const [rating, setRating] = React.useState(0);
   const [brandsSelected, setBrandsSelected] = React.useState(["Apple", "Samsung", "Sony", "LG", "Amazon Basics"]);
 
   const brands = ["Apple", "Samsung", "Sony", "LG", "Amazon Basics"];
+
 
   useEffect(() => {
     fetch('http://localhost:3100/products/gpu').then
@@ -31,12 +32,7 @@ function GpuPage() {
       setProductsData(data);
     })
   }, [])
-  
 
-
-  function handleFilterBox() {
-    setIsOpen(!isOpen);
-  }
 
   return (
     <div>
@@ -55,30 +51,37 @@ function GpuPage() {
               <RiGridFill className='mr-2'/>
               <span>Grid</span>
             </button>
-            <button className='bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 flex items-center transition-colors duration-200'>
+            <button 
+              className='bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 flex items-center transition-colors duration-200'
+              onClick={()=> setIsSortOpen(!isSortOpen)}
+            >
               <FaSort className='mr-2'/>
               <span>Sort By</span>
             </button>
+            <div className='absolute top-[264px] right-[762px] z-50'>
+                <SortBox
+                  isOpen={isSortOpen}
+                  setIsOpen={setIsSortOpen}
+                  data={ProductData}
+                  setData = {setProductsData}
+                />
+              </div>
             <button 
               className='bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 flex items-center transition-colors duration-200'
-              onClick={handleFilterBox}
+              onClick={()=> setIsFilterOpen(!isFilterOpen)} 
             >
               <span>Filter By</span>
               <FaSort className='ml-2'/>
             </button>
-              <div className='absolute top-[34%] right-[37%] z-50'>
+              <div className='absolute top-[264px] right-[463px] z-50'>
                 <FilterBox
-                  priceRange={priceRange}
-                  setPriceRange={setPriceRange}
-                  tdpRange={tdpRange}
-                  setTdpRange={setTdpRange}
-                  rating={rating}
-                  setRating={setRating}
                   brands={brands}
                   brandsSelected={brandsSelected}
                   setBrandsSelected={setBrandsSelected}
-                  isOpen={isOpen}
-                  setIsOpen={setIsOpen}
+                  isOpen={isFilterOpen}
+                  setIsOpen={setIsFilterOpen}
+                  data={ProductData}
+                  setData={setProductsData}
                 />
               </div>
 
@@ -96,6 +99,7 @@ function GpuPage() {
                 <GridCard 
                   key={index}
                   data={data}
+                  buildId={buildId}
                 />
               ))
             }
@@ -135,7 +139,6 @@ function GpuPage() {
     </div>
   )
 }
-
 
 
 export default GpuPage;

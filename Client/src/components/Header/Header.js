@@ -42,9 +42,9 @@ function Header() {
               <button className={styles.headerSearchButton}>PreBuilts</button>
             </Link>
 
-            <Link href={'/comparator'}>
+            {/* <Link href={'/comparator'}>
             <button className={styles.headerSearchButton}>Comparator</button>
-            </Link>
+            </Link> */}
 
             {/* <button className={styles.headerSearchButton}>BenchMarks</button> */}
 

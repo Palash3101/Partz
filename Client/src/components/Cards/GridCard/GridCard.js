@@ -6,9 +6,12 @@ import { HiShoppingBag } from "react-icons/hi2";
 import { Rating } from 'react-simple-star-rating'
 import Link from 'next/link';
 
+import { useRouter } from 'next/navigation';
 
 
 function GridCard(props) {
+  const router = useRouter();
+
   function printValue(key, value) {
     if (value===null || value===undefined) return 'N/A';
     if (key==='tdp') return value + ' W';
@@ -18,6 +21,26 @@ function GridCard(props) {
     else if (key=='rt_enabled' && value===0) return 'No';
 
     return value;
+    
+  }
+  
+
+  function AddToBuild(buildId, productId) {
+
+
+  console.log(buildId, productId);
+
+  try {
+    if (buildId !== null && buildId !== undefined && typeof buildId === 'string' && buildId.length === 5) {
+      router.push(`/builder/${buildId}`);
+    } else {
+      console.log('Invalid buildId or no build currently.');
+    }
+  } catch (err) {
+    console.error('Error during build navigation:', err);
+  }
+
+  console.log('No Build on Currently');
 
   }
 
@@ -79,15 +102,14 @@ function GridCard(props) {
             <span className='text-sm'>Buy Now</span>
           </Link>
           
-          <Link href={{pathname: `/builder/${props.buildId}`}} className='w-full'>
             <button 
               className='bg-blue-500 hover:bg-blue-600 text-white rounded-[10px] w-full h-[35px] flex items-center justify-center transition-colors duration-200'
               aria-label="Add to PC build"
+              onClick={()=>{AddToBuild(props.buildId, props.data.id)}}
             >
               <TiShoppingCart className='mr-1' />
               <span className='text-sm'>Add to Build</span>
             </button>
-          </Link>
         </div>
       </div>
     </div>
