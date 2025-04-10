@@ -1,4 +1,4 @@
-export default function reformatProductOutput(data) {
+function reformatProductOutput(data) {
   let product = {
     "id": data.id,
     "name": data.name,
@@ -15,3 +15,17 @@ export default function reformatProductOutput(data) {
 
   return product;
 }
+
+async function getOutput(st, pool) {
+  let data =  await pool.query(st)
+  
+  data = data[0].map((item) => {
+    return reformatProductOutput(item)
+  })
+
+  return data;
+}
+
+
+
+module.exports = getOutput;

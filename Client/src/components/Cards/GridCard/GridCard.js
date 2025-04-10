@@ -10,23 +10,9 @@ import { useRouter } from 'next/navigation';
 
 
 function GridCard(props) {
-  const router = useRouter();
-
-  function printValue(key, value) {
-    if (value===null || value===undefined) return 'N/A';
-    if (key==='tdp') return value + ' W';
-    if (key.split('_')[1] === 'clock') return value + ' GHz';
-
-    if (key=='rt_enabled' && value===1) return 'Yes';
-    else if (key=='rt_enabled' && value===0) return 'No';
-
-    return value;
-    
-  }
-  
+  const router = useRouter();  
 
   function AddToBuild(buildId, productId) {
-
 
   console.log(buildId, productId);
 
@@ -68,7 +54,7 @@ function GridCard(props) {
           <div key={index}className={index===Object.entries(props.data.specs).length-1 ? 'col-span-2' : 'col-span-1'}>
             <div className='w-auto h-auto p-none m-none' >
               <span className='text-m font-[700]'>{key.toLocaleUpperCase()} : </span>
-              <span className='text-m'>{printValue(key.toLowerCase(), value)}</span>
+              <span className='text-m'>{value}</span>
             </div>
           </div>
         )) 
