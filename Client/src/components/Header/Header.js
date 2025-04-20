@@ -4,58 +4,75 @@ import React from 'react'
 import styles from './header.module.css';
 import Link from 'next/link';
 
-import { HiSearch,HiChevronDown, HiChevronUp  } from "react-icons/hi";
+import { HiSearch, HiChevronDown, HiUser, HiDesktopComputer} from "react-icons/hi";
 import { useState } from 'react';
 
 import ProductsSubmenu from '@/components/ui/ProductsSubmenu';
 
 function Header() {
   const [productsToggle, setProductsToggle] = useState(false);
-
+  const currentBuild = 'abcde'; // Placeholder for current build data
 
   return (
-    <main className={styles.headerWrapper}  data-theme="dark">
-      <div>
-      <div className={styles.headerTitle}>
-            Partz
-        </div>        
+    <main className={styles.headerWrapper} data-theme="dark">
+      <div className={styles.headerSearchButtonWrapper}>
+        <Link className={styles.headerTitle} href={'/'}>
+          Partz
+        </Link>
 
-        <div className={styles.headerSearchButtonWrapper}>
-            <Link href={'/'}>
-            <button className={styles.headerSearchButton} >
-              <HiSearch style={{scale:1.3, margin:'1px'}}/>
+        <div className={styles.navButtonsContainer}>
+          <Link href={'/builder'}>
+            <button className={styles.headerNavButton}>Builder</button>
+          </Link>
+
+          <Link href={'/guides'}>
+            <button className={styles.headerNavButton}>Guides</button>
+          </Link>
+           
+          <Link href={'/products/prebuilts'}>
+            <button className={styles.headerNavButton}>PreBuilts</button>
+          </Link>
+
+          <Link href={'/products/prebuilts'}>
+            <button className={styles.headerNavButton}>Comparator</button>
+          </Link>
+
+          <Link href={'/products/prebuilts'}>
+            <button className={styles.headerNavButton}>Benchmarks</button>
+          </Link>
+
+          <button 
+            className={`${styles.headerNavButton} ${styles.dropdownButton}`} 
+            onClick={()=>setProductsToggle(!productsToggle)}
+          >
+            Products
+            <HiChevronDown className={styles.dropdownIcon} />
+          </button>
+        </div>
+        
+        <div className={styles.rightIconsContainer}>
+          <Link href="/search">
+            <button className={styles.iconButton} title="Search">
+              <HiSearch size={24} />
             </button>
-            </Link>
-            <Link href={'/builder'}>
-                <button className={styles.headerSearchButton}>Builder</button>
-            </Link>
-
-            <Link href={'/guides'}>
-            <button className={styles.headerSearchButton}>Guides</button>
-            </Link>
-            
-            <button className={styles.headerSearchButton} onClick={()=>setProductsToggle(!productsToggle)}>
-              Products
-              <HiChevronDown style={{scale:1.3,  marginLeft:'5px', marginBottom:'5px'}}/>
+          </Link>
+          <Link href={`/builder/${currentBuild}`} className='border-r-2 pr-3'>
+            <button className={styles.iconButton} title="Current Build">
+              <HiDesktopComputer size={24} />
             </button>
-            <Link href={'/products/prebuilts'}>
-              <button className={styles.headerSearchButton}>PreBuilts</button>
-            </Link>
+          </Link>
 
-            {/* <Link href={'/comparator'}>
-            <button className={styles.headerSearchButton}>Comparator</button>
-            </Link> */}
+          <Link href="/profile">
+            <button className={styles.iconButton} title="Profile">
+              <HiUser size={24} />
+            </button>
+          </Link>
 
-            {/* <button className={styles.headerSearchButton}>BenchMarks</button> */}
-
-            {/* <button className={styles.headerSearchButton}>Forums</button> */}
         </div>
       </div>
 
-
       <ProductsSubmenu toggle={productsToggle} setToggle={setProductsToggle}/>
     </main>
-    
   )
 }
 

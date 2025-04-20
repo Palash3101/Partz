@@ -7,9 +7,7 @@ import EmblaCarousel from '@/components/Cards/IdeaCardCarousel';
 function Ideas({data}) {
 
   return (
-    <div className={styles.ideasSectionWrapper} data-theme="dark">
-
-        
+    <div className='my-10'>
         <EmblaCarousel data={data}/>    
 
     </div>

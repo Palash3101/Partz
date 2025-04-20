@@ -5,6 +5,7 @@ const router = express.Router();
 const {GetCpuData} = require('../controllers/ProductCategories/cpu.js')
 const {GetGpuData} = require('../controllers/ProductCategories/gpu.js')
 const {GetMotherboardData} = require('../controllers/ProductCategories/motherboard.js');
+const {GetMemoryData} = require('../controllers/ProductCategories/memory.js');
 
 const {GetProductData}  = require('../controllers/product.js');
 
@@ -23,6 +24,11 @@ router
 router
 .route('/motherboard')
 .get( GetMotherboardData);
+
+//Moemory Router
+router
+.route('/memory')
+.get(GetMemoryData);
 
 
 router

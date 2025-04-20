@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { animate, AnimatePresence, motion } from 'framer-motion';
 import styles from '../Header/header.module.css';
 import Link from 'next/link';
-import { RiSpotifyFill } from 'react-icons/ri';
 
 function ProductsSubmenu({toggle, setToggle}){
 

@@ -4,7 +4,7 @@
     background-image: linear-gradient(var(--background-color),  var(--background-ideas));
     color: var(--font-color);
 
-    height: 250px;
+    height: auto;
     width: 100% ;
     display: flex;
     justify-content: space-between;

@@ -1,4 +1,4 @@
-export default function checkType(data){
+function checkType(data){
   switch (data.product_type.toUpperCase()){
     case 'CPU':
       return cpuStructurer(data);
@@ -60,3 +60,4 @@ function gpuStructurer(data){
 }
 
 
+module.exports = { checkType };

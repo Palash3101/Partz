@@ -3,8 +3,7 @@ import { LampDemo } from '@/components/ui/lamp';
 import React from 'react'
 
 import Ideas from './ideas';
-import Prebuilts from './prebuilts';
-
+import styles from './home.module.css';
 
 function HomePage() {
     const Guides = [
@@ -86,10 +85,11 @@ function HomePage() {
             <LampDemo />
         </div>
 
+        <div className={styles.ideasSectionWrapper} data-theme='dark'>
+          <Ideas data={Guides}/>
+        </div>
 
-        <Ideas data={Guides}/>
-
-        <Prebuilts data={PreBuilts}/>
+        
 
     </div>
 

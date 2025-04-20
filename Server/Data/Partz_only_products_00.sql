@@ -96,7 +96,7 @@ CREATE TABLE `motherboard` (
 CREATE TABLE `PCI-e_lookup` (
     `id` CHAR(7) NOT NULL UNIQUE,
     `motherboard_id` CHAR(7),
-    `generation` FLOAT,
+    `pcie_generation` FLOAT,
     `amount` INT,
     `Slot_type` INT,
     PRIMARY KEY(`id`)
@@ -116,9 +116,9 @@ CREATE TABLE `Memory_lookup` (
 CREATE TABLE `storage_lookup` (
     `id` CHAR(7) NOT NULL UNIQUE,
     `motherboard_id` CHAR(7),
-    `amount` INT,
-    `genertion` FLOAT,
-    `Type` VARCHAR(255),
+    `storage_amount` INT,
+    `storage_genertion` FLOAT,
+    `type` VARCHAR(255),
     PRIMARY KEY(`id`)
 );
 
@@ -132,10 +132,10 @@ CREATE TABLE `ports_lookup` (
 
 CREATE TABLE `memory` (
     `id` CHAR(7) NOT NULL UNIQUE,
-    `generation` VARCHAR(255),
+    `generation` VARCHAR(5),
     `amount` INT,
-    `size` VARCHAR(255),
-    `speed` VARCHAR(255),
+    `size` VARCHAR(20),
+    `speed` INT,
     PRIMARY KEY(`id`)
 );
 

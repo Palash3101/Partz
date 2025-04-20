@@ -66,14 +66,13 @@ INSERT INTO `GPU` (`id`, `VRAM`, `base_clock`, `boost_clock`, `cuda_cores`, `rt_
 ('e6F5g4H', 12, 2.3, 2.6, 2560, 40, 230, 4.0, 'Dual Slot', TRUE, NULL, 2.0, 'GDDR6');
 
 
-INSERT INTO `memory` (`id`, `generation`, `amount`, `size`, `speed`) VALUES
-('Q9vH6mE', 'DDR5', 32, '16GBx2', '6000MHz'),
-('M0n1O2p', 'DDR5', 32, '16GBx2', '6000MHz'),
-('xY2a9Bq', 'DDR5', 32, '16GBx2', '5600MHz'),
-('E6mQ9vH', 'DDR5', 32, '16GBx2', '6400MHz'),
-('p2O1n0M', 'DDR5', 32, '16GBx2', '6200MHz'),
-('m0P9n8O', 'DDR5', 32, '16GBx2', '6800MHz');
-
+INSERT INTO `memory` (`id`, `generation`, `amount`, `size`, `speed`, `type`) VALUES
+('Q9vH6mE', 'DDR5', 32, '16GBx2', 6000, 'DIMM'),
+('M0n1O2p', 'DDR5', 32, '16GBx2', 6000, 'DIMM'),
+('xY2a9Bq', 'DDR5', 32, '16GBx2', 5600, 'DIMM'),
+('E6mQ9vH', 'DDR5', 32, '16GBx2', 6400, 'DIMM'),
+('p2O1n0M', 'DDR5', 32, '16GBx2', 6200, 'DIMM'),
+('m0P9n8O', 'DDR5', 32, '16GBx2', 6800, 'DIMM');
 
 
 INSERT INTO `power_supply` (`id`, `wattage`, `certification`, `fansize`, `modular`, `form_factor`) VALUES

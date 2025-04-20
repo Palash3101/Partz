@@ -3,22 +3,30 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export function LampDemo() {
-    return (
-      <LampContainer>
-        <motion.h1
-          initial={{ opacity: 0.5, y: 110 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="h-[150px] bg-gradient-to-br from-slate-300 to-slate-500 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
-          Build PC'S<br /> the right way
-        </motion.h1>
-      </LampContainer>
-    );
-  }
+  return (
+    <LampContainer>
+      <motion.h1
+        initial={{ opacity: 0.5, y: 110 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="h-auto text-center text-4xl font-medium tracking-tight text-transparent bg-gradient-to-br from-slate-300 to-slate-500 bg-clip-text md:text-7xl"
+      >
+        <button className="align-bottom inline-flex items-center justify-center rounded-lg border border-slate-500 px-4 py-0 text-xl md:text-7xl font-semibold text-slate-450 hover:bg-slate-800/30 hover:text-slate-200 transition">
+          Build
+        </button>{" "}
+        PC'S<br /> the right way
+      </motion.h1>
+    </LampContainer>
+  );
+}
+
+
+
+
 
 export const LampContainer = ({
   children,
@@ -27,7 +35,7 @@ export const LampContainer = ({
   return (
     (<div
       className={cn(
-        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full z-0",
+        "relative flex min-h-[750px] flex-col items-center justify-center overflow-hidden bg-slate-950 w-full z-0",
         className
       )}>
       <div
