@@ -1,6 +1,5 @@
 .headerWrapper{
-  background-image: linear-gradient(var(--background-header), var(--background-color));
-  color: var(--font-color);
+  background-image: linear-gradient(black,  rgb(17, 24, 39));
   padding-top: 10px;
   padding-bottom: 6px;
   position: relative;
@@ -10,14 +9,14 @@
   font-size: 35px;
   text-align: center;
   font-weight: bold;
-  background-color: var(--background-header);
+  background-color: linear-gradient(black,  rgb(17, 24, 39));
   color: var(--font-color);
   margin-right: 20px;
 }
 
 .headerSearchButtonWrapper{
   display: flex;
-  background-image: linear-gradient(var(--background-header), var(--background-color));
+  background-image: linear-gradient(black,  rgb(17, 24, 39));
   color: #EEEEEE;
   padding-left: 30px;
   padding-right: 30px;

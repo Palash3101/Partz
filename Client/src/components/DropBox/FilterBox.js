@@ -10,9 +10,6 @@ function FilterBox({ brands, setBrandsSelected, brandsSelected, isOpen, setIsOpe
   const [tdpRange, setTdpRange] = React.useState([0, 500]);
   const [rating, setRating] = React.useState(0);
 
-  const handleRating = (rate) => {
-    setRating(rate);
-  }
 
   const clearFilters = () => {
     setPriceRange([0, 1000]);
@@ -27,10 +24,10 @@ function FilterBox({ brands, setBrandsSelected, brandsSelected, isOpen, setIsOpe
   }
 
   return (
-    <div>
+    <div className='z-50'>
       { isOpen &&
-        <div className="w-[300px] h-[415px] mt-1 bg-black/80 border rounded-[20px] rounded-bl-none rounded-tl-none shadow-lg p-3 text-white">
-          <div className="flex justify-start mb-2">
+        <div className="w-[300px] z-30 h-auto mt-1 bg-black backdrop-blur-sm border border-gray-700/50 rounded-2xl shadow-xl p-4 text-white">
+          <div className="flex justify-start mb-3">
             <button 
               onClick={clearFilters}
               className="text-blue-400 hover:text-blue-300 text-sm"
@@ -39,7 +36,7 @@ function FilterBox({ brands, setBrandsSelected, brandsSelected, isOpen, setIsOpe
             </button>
           </div>
           
-          <div className="flex space-x-4 mb-4">
+          <div className="flex space-x-4 mb-5">
             <div className="w-1/2">
               <SliderElement 
                 title="Price Range" 
@@ -62,14 +59,14 @@ function FilterBox({ brands, setBrandsSelected, brandsSelected, isOpen, setIsOpe
             </div>
           </div>
           
-          <div className="mb-4">
-            <h4 className="font-medium mb-1 text-lg">Minimum Rating</h4>
+          <div className="mb-5">
+            <h4 className="font-medium mb-2 text-lg">Minimum Rating</h4>
             <Rating
               SVGclassName="inline-block"
               allowFraction={true}
               iconsCount={5}
-              size={23}
-              onClick={handleRating}
+              size={24}
+              onClick={(rate)=> setRating(rate)}
               initialValue={rating}
             />
           </div>
@@ -81,7 +78,7 @@ function FilterBox({ brands, setBrandsSelected, brandsSelected, isOpen, setIsOpe
           />
           
           <button 
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:brightness-110 text-white py-2 px-4 rounded-xl shadow-md transition duration-300"
             onClick={applyFilter}  
           >
             Apply Filters
@@ -100,8 +97,8 @@ function SliderElement({title, range, setRange, min, max, prefix = "", suffix = 
 
   return (
     <div>
-      <h4 className="font-medium mb-1 text-lg">{title}</h4>
-      <div className="flex justify-between text-gray-300 text-sm">
+      <h4 className="font-medium mb-2 text-lg">{title}</h4>
+      <div className="flex justify-between text-gray-300 text-sm mb-1">
         <span>{prefix}{range[0]}{suffix}</span>
         <span>{prefix}{range[1]}{suffix}</span>
       </div>
@@ -119,8 +116,10 @@ function SliderElement({title, range, setRange, min, max, prefix = "", suffix = 
           '& .MuiSlider-thumb': {
             width: 16,
             height: 16,
+            backgroundColor: '#3B82F6',
           },
           '& .MuiSlider-track': {
+            background: 'linear-gradient(to right, #3B82F6, #8B5CF6)',
             height: 5,
           },
           '& .MuiSlider-rail': {
@@ -145,16 +144,22 @@ function BrandCheckbox({brands, setBrandsSelected, brandsSelected}) {
   }
 
   return(
-    <div className="mb-4">
-      <h4 className="font-medium mb-1 text-lg">Brands</h4>
-      <div className="max-h-32 overflow-y-auto text-gray-300">
+    <div className="mb-5">
+      <h4 className="font-medium mb-2 text-lg">Brands</h4>
+      <div className="max-h-32 overflow-y-auto text-gray-300 bg-gray-800/70 rounded-xl p-2">
         {brands.map((brand, index) => (
-          <div key={index} className="flex items-center">
+          <div key={index} className="flex items-center py-1">
             <Checkbox 
               defaultChecked 
               onChange={() => {handleChange(brand)}}
               size="small"
-              sx={{padding: '2px'}}
+              sx={{
+                padding: '2px', 
+                color: '#6B7280',
+                '&.Mui-checked': {
+                  color: '#3B82F6',
+                },
+              }}
             />
             <label className="text-base">{brand}</label>
           </div>

@@ -25,21 +25,21 @@ function Header() {
             <button className={styles.headerNavButton}>Builder</button>
           </Link>
 
-          <Link href={'/guides'}>
+          {/* <Link href={'/guides'}>
             <button className={styles.headerNavButton}>Guides</button>
-          </Link>
+          </Link> */}
            
-          <Link href={'/products/prebuilts'}>
+          <Link href={'/prebuilts'}>
             <button className={styles.headerNavButton}>PreBuilts</button>
           </Link>
 
-          <Link href={'/products/prebuilts'}>
+          {/* <Link href={'/products/prebuilts'}>
             <button className={styles.headerNavButton}>Comparator</button>
           </Link>
 
           <Link href={'/products/prebuilts'}>
             <button className={styles.headerNavButton}>Benchmarks</button>
-          </Link>
+          </Link> */}
 
           <button 
             className={`${styles.headerNavButton} ${styles.dropdownButton}`} 
