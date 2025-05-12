@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import { animate, AnimatePresence, motion } from 'framer-motion';
 
-function Guides() {
+function Prebuilts() {
   const guideData = [
     {
       id: 'A1B2C',
@@ -202,7 +202,7 @@ function Guides() {
         <div className="rounded-3xl bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 shadow-2xl overflow-hidden mb-16">
           <div className="pt-12 pb-16 px-8">
             <h1 className="font-bold text-5xl text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
-              PC Build Guides
+              Pre-built PC's
             </h1>
             <p className="text-l text-center text-gray-300 max-w-2xl mx-auto">
               Find the perfect PC build for your needs. Whether you're a professional, a gamer, or a content creator,
@@ -325,4 +325,4 @@ function NavButton({text,selected, setSelected,typeColors}){
   );
 };
 
-export default Guides;
+export default Prebuilts;

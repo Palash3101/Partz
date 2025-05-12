@@ -7,11 +7,13 @@ import Link from 'next/link';
 import { HiSearch, HiChevronDown, HiUser, HiDesktopComputer} from "react-icons/hi";
 import { useState } from 'react';
 
+
 import ProductsSubmenu from '@/components/ui/ProductsSubmenu';
+import RedirectBuilder from '@/services/builderRedirectLogic';
+
 
 function Header() {
   const [productsToggle, setProductsToggle] = useState(false);
-  const currentBuild = 'abcde'; // Placeholder for current build data
 
   return (
     <main className={styles.headerWrapper} data-theme="dark">
@@ -21,9 +23,12 @@ function Header() {
         </Link>
 
         <div className={styles.navButtonsContainer}>
-          <Link href={'/builder'}>
-            <button className={styles.headerNavButton}>Builder</button>
-          </Link>
+        <button 
+          className={styles.headerNavButton}
+          onClick={RedirectBuilder}
+        >
+          Builder
+        </button>
 
           {/* <Link href={'/guides'}>
             <button className={styles.headerNavButton}>Guides</button>
@@ -56,11 +61,15 @@ function Header() {
               <HiSearch size={24} />
             </button>
           </Link>
-          <Link href={`/builder/${currentBuild}`} className='border-r-2 pr-3'>
-            <button className={styles.iconButton} title="Current Build">
-              <HiDesktopComputer size={24} />
-            </button>
-          </Link>
+
+          <button 
+            className={styles.iconButton} 
+            title="Current Build"
+            onClick={RedirectBuilder}
+          >
+            <HiDesktopComputer size={24} />
+          </button>
+
 
           <Link href="/profile">
             <button className={styles.iconButton} title="Profile">

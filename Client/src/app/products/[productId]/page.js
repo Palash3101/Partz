@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Rating } from 'react-simple-star-rating';
 import { motion } from 'framer-motion';
-import styles from './page.module.css';
+
 
 function PCComponentShowcase({ params }) {
   const id = React.use(params).productId; // Safely access productId

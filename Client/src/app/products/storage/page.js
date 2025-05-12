@@ -12,7 +12,7 @@ import SortBox from '@/components/DropBox/SortBox';
 import ProductGrid from '@/components/Cards/GridCard/ProductGrid';
 import Pagination from '@/components/Cards/GridCard/Pagination';
 
-function MemoryPage() {
+function StoragePage() {
   const buildId = useSearchParams().get('buildId');
 
   const [ProductData, setProductsData] = useState([]);
@@ -26,13 +26,12 @@ function MemoryPage() {
   const brands = ["Apple", "Samsung", "Sony", "LG", "Amazon Basics"];
 
   useEffect(() => {
-    fetch('http://localhost:3100/products/memory').then
+    fetch('http://localhost:3100/products/Storage').then
     ((response)=> response.json()).then
     ((data) => {
       setProductsData(data);
     })
   }, [])
-
 
   // Close dropdown menus when clicking outside
   useEffect(() => {
@@ -65,7 +64,7 @@ function MemoryPage() {
         <div className="mb-10 rounded-3xl bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 shadow-2xl overflow-hidden">
           <div className="pt-8 pb-10 px-8">
             <h1 className="font-bold text-4xl text-center mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
-              Choose A Memory
+              Choose A Storage
             </h1>
             <p className="text-center text-gray-300 max-w-2xl mx-auto">
               Select the perfect processor for your custom PC build
@@ -175,4 +174,4 @@ function MemoryPage() {
   )
 }
 
-export default MemoryPage;
+export default StoragePage;

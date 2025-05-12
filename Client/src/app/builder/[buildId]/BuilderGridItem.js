@@ -1,13 +1,25 @@
 import React from 'react';
 import { RxCrossCircled, RxCheckCircled } from "react-icons/rx";
 import { FaPlus } from "react-icons/fa";
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+
 
 function BuilderGridItem({isItem, itemData, buildId}) {
 
   function handleBuy(id){
     console.log(id);
+  }
+
+  function handleRedirect(itemData, buildId){
+    console.log(buildId);
+
+    if (itemData === "Power Supply") {
+      window.location.href = `/products/powersupply?buildId=${buildId}`;
+    }
+    else{
+      window.location.href = `/products/${itemData.toLowerCase()}?buildId=${buildId}`;
+    }
+
   }
 
   return (
@@ -43,12 +55,12 @@ function BuilderGridItem({isItem, itemData, buildId}) {
           </>
         ) : (
           <div className="flex-1 mr-4">
-            <Link href={`/products/${itemData.type.toLowerCase()}?buildId=${buildId}`} className="text-inherit">
-              <button className="flex items-center text-white hover:text-green-300 transition-colors duration-200">
-                <FaPlus className="mr-2" />
-                <span className="font-medium">Add {itemData.type}</span>
-              </button>
-            </Link>
+            <button 
+              onClick={()=>handleRedirect(itemData.type, buildId)}
+              className="flex items-center text-white hover:text-green-300 transition-colors duration-200">
+              <FaPlus className="mr-2" />
+              <span className="font-medium">Add {itemData.type}</span>
+            </button>
           </div>
         )}
         
