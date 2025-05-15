@@ -71,35 +71,33 @@ function Builder({params}) {
         </div>
 
         {/* Build Info Section */}
-        <div className="mb-12">
-          <div className="relative">
-            {/* Glow effect */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl opacity-50 blur"></div>
+        <div className="mb-12 relative">
+          {/* Glow effect */}
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl opacity-50 blur"></div>
+          
+          {/* Content */}
+          <div className="relative flex items-center justify-between bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl border border-gray-700 shadow-xl p-6">
+            <div className="flex items-center">
+              <div className="bg-black/40 px-6 py-3 rounded-xl border border-gray-700">
+                <span className="font-medium text-gray-300">Build ID:</span>
+                <span className="ml-2 font-bold text-white">{buildId}</span>
+              </div>
+              <button className="ml-6 px-5 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-green-600 to-teal-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                Save Build
+              </button>
+            </div>
             
-            {/* Content */}
-            <div className="relative flex items-center justify-between bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl border border-gray-700 shadow-xl p-6">
-              <div className="flex items-center">
-                <div className="bg-black/40 px-6 py-3 rounded-xl border border-gray-700">
-                  <span className="font-medium text-gray-300">Build ID:</span>
-                  <span className="ml-2 font-bold text-white">{buildId}</span>
-                </div>
-                <button className="ml-6 px-5 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-green-600 to-teal-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                  Save Build
-                </button>
-              </div>
-              
-              <div className="px-8 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-red-600 font-bold text-2xl text-white shadow-lg">
-                ${price}
-              </div>
-              
-              <div className="flex items-center">
-                <button className="mr-6 px-5 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                  New Build
-                </button>
-                <div className="bg-black/40 px-6 py-3 rounded-xl border border-gray-700">
-                  <span className="font-medium text-gray-300">Estimated Power:</span>
-                  <span className="ml-2 font-bold text-white">{estimatedwattage}W</span>
-                </div>
+            <div className="px-8 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-red-600 font-bold text-2xl text-white shadow-lg">
+              ${price}
+            </div>
+            
+            <div className="flex items-center">
+              <button className="mr-6 px-5 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                New Build
+              </button>
+              <div className="bg-black/40 px-6 py-3 rounded-xl border border-gray-700">
+                <span className="font-medium text-gray-300">Estimated Power:</span>
+                <span className="ml-2 font-bold text-white">{estimatedwattage}W</span>
               </div>
             </div>
           </div>

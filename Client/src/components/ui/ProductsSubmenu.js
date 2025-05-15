@@ -72,17 +72,20 @@ function ProductsSubmenu({ toggle, setToggle }) {
     initial: { y: 20, opacity: 0 },
     animate: { y: 0, opacity: 1 },
     exit: { y: 10, opacity: 0 }
-  };
+  }; 
 
   return (
     <AnimatePresence>
-      {toggle && (
+      {toggle &&
+      (
+        <div className='absolute left-0 w-full z-40 flex justify-center '>
+
         <motion.div
           variants={mainVariant}
           initial="initial"
           animate="animate"
           exit="exit"
-          className="absolute right-[100px] transform -translate-x-1/2 w-5/6 max-w-7xl bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl shadow-2xl border border-gray-700 z-50 overflow-hidden"
+          className="transform w-5/6 max-w-7xl bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl shadow-2xl border border-gray-700 z-50 overflow-hidden"
         >
           <div className="flex flex-col lg:flex-row p-6">
             {/* Components Section */}
@@ -126,32 +129,10 @@ function ProductsSubmenu({ toggle, setToggle }) {
                   />
                 ))}
               </div>
-              
-              {/* Call to action buttons */}
-              <div className="flex flex-wrap gap-4 mt-6">
-                <motion.div variants={itemVariant}>
-                  <Link
-                    href="/products/prebuilts"
-                    onClick={() => setToggle(false)}
-                    className="inline-block px-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-medium shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    Explore Pre-Builts
-                  </Link>
-                </motion.div>
-                
-                <motion.div variants={itemVariant}>
-                  <Link
-                    href="/guides"
-                    onClick={() => setToggle(false)}
-                    className="inline-block px-5 py-3 bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white rounded-xl font-medium shadow-lg hover:shadow-purple-500/30 transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    View Build Guides
-                  </Link>
-                </motion.div>
-              </div>
             </div>
           </div>
         </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
@@ -174,11 +155,11 @@ function ComponentCard({ item, setToggle, variants }) {
               <img
                 className="w-16 h-16 object-contain"
                 src={item.image}
-                alt={item.title}
+                alt={item.title != 'Powersupply'? item.title:'Power Supply'}
               />
             </div>
             <h4 className="text-white text-lg font-medium text-center">
-              {item.title}
+              {item.title != 'Powersupply'? item.title:'Power Supply'}
             </h4>
           </div>
         </div>

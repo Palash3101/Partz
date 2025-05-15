@@ -15,6 +15,7 @@ import RedirectBuilder from '@/services/builderRedirectLogic';
 function Header() {
   const [productsToggle, setProductsToggle] = useState(false);
 
+  
   return (
     <main className={styles.headerWrapper} data-theme="dark">
       <div className={styles.headerSearchButtonWrapper}>
@@ -82,6 +83,8 @@ function Header() {
 
       <ProductsSubmenu toggle={productsToggle} setToggle={setProductsToggle}/>
     </main>
+
+
   )
 }
 
