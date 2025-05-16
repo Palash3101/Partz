@@ -86,22 +86,35 @@ function PCComponentShowcase({ params }) {
               ))}
             </div>
 
-            {/* Specifications */}
-            <div className="mt-10">
-              <h2 className="text-xl font-bold mb-6 pb-2 border-b border-gray-600">
-                Technical Specifications
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {product?.specs && Object.entries(product.specs).map(([key, value]) => (
-                  <div key={key} className="group relative">                
-                    {/* Content */}
-                    <div className="relative flex flex-col bg-gray-800/80 rounded-lg p-3 border border-gray-700">
-                      <span className="text-gray-300 text-sm font-medium">
-                        {key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                      </span>
-                      <span className="text-white font-bold text-lg">{value}</span>
+            {/* Where To Buy */}
+            <div>
+              <h2 className="text-xl font-bold mb-6">Where to Buy</h2>
+              <div className="space-y-4">
+                {product?.retailers?.map((retailer, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="relative group"
+                  >
+                    <div className={`absolute -inset-0.5 ${getStockColor(retailer.stock)} rounded-xl opacity-50 blur-sm group-hover:opacity-70 transition duration-300`}/>
+
+                    <div className="relative flex justify-between items-center p-4 bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl border border-gray-700">
+                      <div className="font-medium text-xl text-white">{retailer.name}</div>
+
+                      <div className="flex items-center">
+
+                        <div className="mx-4 text-2xl font-bold text-white">${retailer.price}</div>
+
+                        <div className="flex space-x-3">
+                          <button className="px-4 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            Buy Now
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -136,53 +149,36 @@ function PCComponentShowcase({ params }) {
                   ${product?.price}
                 </div>
 
-                <button className="px-8 py-3 rounded-xl font-bold text-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                <button className="px-8 py-3 rounded-xl font-bold text-lg text-white bg-green-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                   Add to Build
                 </button>
               </div>
             </div>
 
             <hr className="border-gray-700 my-8" />
-            {/* Where to buy section */}
-            <div>
-              <h2 className="text-xl font-bold mb-6">Where to Buy</h2>
-              <div className="space-y-4">
-                {product?.retailers?.map((retailer, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="relative group"
-                  >
-                    {/* Subtle glow effect */}
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl opacity-50 blur-sm group-hover:opacity-70 transition duration-300"></div>
-
-                    {/* Content */}
-                    <div className="relative flex justify-between items-center p-4 bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl border border-gray-700">
-                      <div className="font-medium text-xl text-white">{retailer.name}</div>
-
-                      <div className="flex items-center">
-                        <div className={`px-3 py-1 rounded-lg text-sm font-medium text-white ${getStockColor(retailer.stock)}`}>
-                          {retailer.stock}
-                        </div>
-
-                        <div className="mx-4 text-2xl font-bold text-white">${retailer.price}</div>
-
-                        <div className="flex space-x-3">
-                          <button className="px-4 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-teal-600 to-emerald-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                            Add to List
-                          </button>
-                          <button className="px-4 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-110 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                            Buy Now
-                          </button>
-                        </div>
-                      </div>
+            {/* Technical Specifications*/}
+            <div className="mt-10">
+              <h2 className="text-xl font-bold mb-6 pb-2 border-b border-gray-600">
+                Technical Specifications
+              </h2>
+              <div className={`grid grid-cols-1 ${product.type=="GPU" ? 'md:grid-cols-3': 'md:grid-cols-2'}  gap-4`}>
+                {product?.specs && Object.entries(product.specs).map(([key, value]) => (
+                  value ?
+                  <div key={key} className="group relative">
+                    <div className='absolute -inset-0.5 bg-gradient-to-r from-blue-800 to-green-900 rounded-lg opacity-50 blur-sm group-hover:opacity-70 transition duration-300'/>                
+                    <div className="relative flex flex-col bg-gray-800/80 rounded-lg p-3 border border-gray-700">
+                      <span className="text-gray-300 text-base font-medium">
+                        {key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                      </span>
+                      <span className="text-white font-bold text-xl">{value}</span>
                     </div>
-                  </motion.div>
+                  </div>
+                  :
+                  null
                 ))}
               </div>
             </div>
+            
           </div>
         </div>
 
