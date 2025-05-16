@@ -1,4 +1,5 @@
 import React from 'react'
+import cookie from "js-cookie";
 
 import { TiShoppingCart } from "react-icons/ti";
 import { HiShoppingBag } from "react-icons/hi2";
@@ -7,27 +8,42 @@ import { Rating } from 'react-simple-star-rating'
 import Link from 'next/link';
 
 import { useRouter } from 'next/navigation';
-
+import { useContext } from 'react';
+import { BuilderContext } from '@/contexts/BuilderContext';
 
 function GridCard(props) {
   const router = useRouter();  
+  const buildId = cookie.get("currentBuild");
+
+  const {parts, setParts} = useContext(BuilderContext);
 
   function AddToBuild(buildId, productId) {
 
-  console.log(buildId, productId);
+  // console.log(buildId, productId);
+  console.log(props.data.product_type);
 
   try {
-    if (buildId !== null && buildId !== undefined && typeof buildId === 'string' && buildId.length === 5) {
+    if (buildId !== null && buildId !== undefined) {
       router.push(`/builder/${buildId}`);
-    } else {
+
+      for (let i=0; i<parts.length; i++){
+        if ((parts[i].type).toUpperCase() === (props.data.product_type).toUpperCase()) {
+          parts[i].id = productId;
+          parts[i].wattage = props.data.wattage;
+          parts[i].price = props.data.price;
+          parts[i].name = props.data.name;
+          setParts(parts)
+          break;
+        }
+      }
+      }
+
+    else {
       console.log('Invalid buildId or no build currently.');
-    }
-  } catch (err) {
+    }} 
+  catch (err) {
     console.error('Error during build navigation:', err);
   }
-
-  console.log('No Build on Currently');
-
   }
 
 
@@ -91,7 +107,7 @@ function GridCard(props) {
             <button 
               className='bg-blue-500 hover:bg-blue-600 text-white rounded-[10px] w-full h-[35px] flex items-center justify-center transition-colors duration-200'
               aria-label="Add to PC build"
-              onClick={()=>{AddToBuild(props.buildId, props.data.id)}}
+              onClick={()=>{AddToBuild(buildId, props.data.id)}}
             >
               <TiShoppingCart className='mr-1' />
               <span className='text-sm'>Add to Build</span>

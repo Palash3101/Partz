@@ -4,15 +4,16 @@ const { pool } = require('../../database.js');
 async function GetStorageData(req, res) {
   try{
     const st = `SELECT 
-      products.id, \`name\`, price, rating, 
+      products.id, \`name\`, price, rating, P.product_type_name,
     form_factor AS \`form factor\`,
     interface AS \`type\`,
       capacity,
       RW_speeds
       FROM
-        \`storage\`, products
+        \`storage\`, products, product_type_lookup as P
       WHERE
-        \`storage\`.id = products.id;
+        \`storage\`.id = products.id AND
+      products.product_type_id = P.product_type_id;
         `
 
     let data = await getOutput(st, pool)

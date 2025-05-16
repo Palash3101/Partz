@@ -18,6 +18,6 @@ function Redirect(buildId){
 
 function NewBuild(){
   console.log("No current build found, redirecting to new page");
-  
+  window.location.href = `/builder/abcde`
 
 }

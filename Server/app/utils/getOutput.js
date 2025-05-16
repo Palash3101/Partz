@@ -4,12 +4,14 @@ function reformatProductOutput(data) {
     "name": data.name,
     "price": data.price,
     "rating": data.rating,
+    "product_type": data.product_type_name,
   }
 
   delete data.id;
   delete data.name;
   delete data.price;
   delete data.rating;
+  delete data.product_type_name;
 
   product.specs = {...data}
 

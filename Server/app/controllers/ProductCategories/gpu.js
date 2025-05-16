@@ -5,7 +5,7 @@ async function GetGpuData(req, res){
   try{
     //Query
       const st = `SELECT 
-      products.id, \`name\`, price, rating, 
+      products.id, \`name\`, price, rating, P.product_type_name,
         DLSS_version, FSR_version, 
 
         concat(TDP,' W') AS TDP, 
@@ -13,9 +13,10 @@ async function GetGpuData(req, res){
         cuda_cores, RT_enabled, 
       concat(vram,'GB ',vram_version) AS VRAM   
       FROM 
-        gpu, products 
+        gpu, products , product_type_lookup as P
       WHERE 
-        gpu.id = products.id;
+        gpu.id = products.id AND
+      products.product_type_id = P.product_type_id;
     ` 
     
     //Process the data

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { use, useEffect, useState } from 'react';
+import React, { use, useContext, useEffect, useState } from 'react';
 import BuilderGridItem from './BuilderGridItem';
 import { motion } from 'framer-motion';
+import { BuilderContext } from '@/contexts/BuilderContext';
 
 function Builder({params}) {
   const buildId = use(params).buildId;
@@ -10,45 +11,21 @@ function Builder({params}) {
   const [estimatedwattage, setEstimatedwattage] = useState(0);
   const [price, setPrice] = useState(0);
 
-  const list = [
-    {
-      type: "Motherboard",
-      data: null
-    },
-    {
-      type: "CPU",
-      data: null
-    },
-    {
-      type: "GPU",
-      data: null
-    },
-    {
-      type: "Power Supply",
-      data: null
-    },
-    {
-      type: "Storage",
-      data: null
-    },
-    {
-      type: "Memory",
-      data: null
-    }
-  ];
+  const {parts} = useContext(BuilderContext);
 
-  useEffect(() => {
-    var totalWattage = 0;
+  useEffect((() => {
+
+    var totalWattage =0;
     var totalPrice = 0;
-    
-    for (let i = 0; i < list.length; i++) {
-      totalWattage += list[i].wattage || 0;
-      totalPrice += list[i].price || 0;
-    }
-    
+
+    parts.map((item)=>{
+      totalWattage += item.wattage
+      totalPrice += item.price
+    })
+
     setEstimatedwattage(totalWattage);
-    setPrice(Math.round(totalPrice * 100) / 100);
-  }, [list]);
+    setPrice(totalPrice);
+  }), [parts]);
 
   return (
     <motion.div 
@@ -106,13 +83,12 @@ function Builder({params}) {
         {/* Components List */}
         <div className="mb-16">
           {
-            list.map((item, index) => {
+            parts.map((item, index) => {
               return (
                 <BuilderGridItem 
                   key={index}
                   isItem={item.id ? true : false} 
                   itemData={item}
-                  buildId={buildId}
                 />
               );
             })

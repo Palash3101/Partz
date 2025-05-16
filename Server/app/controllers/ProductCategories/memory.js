@@ -5,14 +5,15 @@ async function GetMemoryData(req, res){
   try{
   //Query
   const st = `SELECT 
-	products.id, \`name\`, price, rating,
+	products.id, \`name\`, price, rating,P.product_type_name,
     concat(amount, 'GB ', generation) AS size,
     concat(speed, ' MHZ') AS speed,
     type, size AS style
 FROM
-	\`memory\`, products
+	\`memory\`, products, product_type_lookup as P
 WHERE
-	\`memory\`.id = products.id;`
+	\`memory\`.id = products.id AND
+      products.product_type_id = P.product_type_id;`
   
   //process the data
   let data = await getOutput(st, pool)

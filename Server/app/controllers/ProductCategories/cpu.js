@@ -5,15 +5,16 @@ async function GetCpuData(req, res){
   try{
   //Query
   const st = `SELECT 
-    products.id, \`name\`, price, rating, 
+    products.id, \`name\`, price, rating, P.product_type_name,
     concat(base_clock, ' GHZ') AS Base_Clock, 
     concat(boost_clock, ' GHZ') AS Boost_Clock, 
     concat(TDP, ' W') As TDP,
     core_count, integrated_gpu  
     FROM 
-      \`cpu\`, products 
+      \`cpu\`, products , product_type_lookup as P
     WHERE  
-      \`cpu\`.id = products.id;`
+      \`cpu\`.id = products.id AND
+      products.product_type_id = P.product_type_id;`
   
   //process the data
   let data = await getOutput(st, pool)

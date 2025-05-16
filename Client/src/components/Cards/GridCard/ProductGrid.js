@@ -1,7 +1,7 @@
 import React from 'react'
 import GridCard from '@/components/Cards/GridCard/GridCard';
 
-function ProductGrid({ProductData, slice, buildId}) {
+function ProductGrid({ProductData, slice}) {
   return (
 
     <div className="z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
@@ -14,7 +14,6 @@ function ProductGrid({ProductData, slice, buildId}) {
           <div className="relative rounded-2xl overflow-hidden">
             <GridCard 
               data={data}
-              buildId={buildId}
             />
           </div>
         </div>

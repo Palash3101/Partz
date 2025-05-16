@@ -1,7 +1,6 @@
 'use client'
 
 import React, {useState, useEffect} from 'react'
-import { useSearchParams } from 'next/navigation';
 
 import { FaSort } from "react-icons/fa";
 import { RiGridFill, RiListUnordered } from "react-icons/ri";
@@ -13,8 +12,6 @@ import ProductGrid from '@/components/Cards/GridCard/ProductGrid';
 import Pagination from '@/components/Cards/GridCard/Pagination';
 
 function CpuPage() {
-  const buildId = useSearchParams().get('buildId');
-
   const [ProductData, setProductsData] = useState([]);
   const [slice, setSlice] = useState(0);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -25,6 +22,8 @@ function CpuPage() {
 
   const brands = ["Apple", "Samsung", "Sony", "LG", "Amazon Basics"];
 
+
+  // Fetch product data from the server
   useEffect(() => {
     fetch('http://localhost:3100/products/cpu').then
     ((response)=> response.json()).then
@@ -56,6 +55,7 @@ function CpuPage() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isFilterOpen, isSortOpen]);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white py-8">
@@ -157,7 +157,6 @@ function CpuPage() {
           <ProductGrid 
             ProductData={ProductData} 
             slice={slice} 
-            buildId={buildId}
             className="w-full"
           />
         </div>

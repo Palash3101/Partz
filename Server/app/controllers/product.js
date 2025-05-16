@@ -49,8 +49,6 @@ function productStructurer(data){
   delete data.product_type
   delete data.product_type_id
 
-  console.log(data)
-
   product.specs = data
 
   return product
