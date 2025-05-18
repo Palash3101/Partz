@@ -1,254 +1,176 @@
 'use client'
 
-import React, {useState} from 'react'
-import styles from '../page.module.css';
-import FilterSidebar from '@/components/FilterSidebar/FilterSidebar';
-import GridCard from './GridCard';
+import React, {useState, useEffect} from 'react'
 
-import { FaSort} from "react-icons/fa";
+import { FaSort } from "react-icons/fa";
 import { RiGridFill, RiListUnordered } from "react-icons/ri";
+import { FiFilter } from "react-icons/fi";
 
-
-
-import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import FilterBox from '@/components/DropBox/FilterBox';
+import SortBox from '@/components/DropBox/SortBox';
+import ProductGrid from '@/components/Cards/GridCard/ProductGrid';
+import Pagination from '@/components/Cards/GridCard/Pagination';
 
 function CpuPage() {
-
-  const ProductData = [
-    {
-      id: 'A1B2C3',
-      name: 'AMD Ryzen 7 7800X3D',
-      core_count: 8,
-      core_clock: 4.2,
-      boost_clock: 5,
-      graphics: 'Radeon',
-      price: 339,
-      rating: 4.5,
-      tdp: 120
-    },
-    {
-      id: 'D4E5F6',
-      name: 'Intel Core i9-12900K',
-      core_count: 16,
-      core_clock: 3.9,
-      boost_clock: 5.2,
-      graphics: 'Intel UHD 770',
-      price: 589,
-      rating: 4.7,
-      tdp: 125
-    },
-    {
-      id: 'G7H8I9',
-      name: 'AMD Ryzen 5 7600X',
-      core_count: 6,
-      core_clock: 4.7,
-      boost_clock: 5.3,
-      graphics: 'Radeon',
-      price: 299,
-      rating: 4.6,
-      tdp: 105
-    },
-    {
-      id: 'J1K2L3',
-      name: 'Intel Core i7-13700K',
-      core_count: 12,
-      core_clock: 3.4,
-      boost_clock: 5.4,
-      graphics: 'Intel UHD 770',
-      price: 419,
-      rating: 4.8,
-      tdp: 125
-    },
-    {
-      id: 'M4N5O6',
-      name: 'AMD Ryzen 9 7950X',
-      core_count: 16,
-      core_clock: 4.5,
-      boost_clock: 5.7,
-      graphics: 'Radeon',
-      price: 699,
-      rating: 4.9,
-      tdp: 170
-    },
-    {
-      id: 'P7Q8R9',
-      name: 'Intel Core i5-12600K',
-      core_count: 10,
-      core_clock: 3.7,
-      boost_clock: 4.9,
-      graphics: 'Intel UHD 770',
-      price: 289,
-      rating: 4.4,
-      tdp: 125
-    },
-    {
-      id: 'S1T2U3',
-      name: 'AMD Ryzen 3 5300G',
-      core_count: 4,
-      core_clock: 4.0,
-      boost_clock: 4.2,
-      graphics: 'Radeon',
-      price: 149,
-      rating: 4.2,
-      tdp: 65
-    },
-    {
-      id: 'V4W5X6',
-      name: 'Intel Core i3-12100',
-      core_count: 4,
-      core_clock: 3.3,
-      boost_clock: 4.3,
-      graphics: 'Intel UHD 730',
-      price: 129,
-      rating: 4.3,
-      tdp: 60
-    },
-    {
-      id: 'Y7Z8A9',
-      name: 'AMD Ryzen 9 5900X',
-      core_count: 12,
-      core_clock: 3.7,
-      boost_clock: 4.8,
-      graphics: 'None',
-      price: 549,
-      rating: 4.7,
-      tdp: 105
-    },
-    {
-      id: 'B1C2D3',
-      name: 'Intel Core i9-13900KS',
-      core_count: 24,
-      core_clock: 3.2,
-      boost_clock: 6.0,
-      graphics: 'Intel UHD 770',
-      price: 739,
-      rating: 5.0,
-      tdp: 150
-    },
-    {
-      id: 'E4F5G6',
-      name: 'AMD Ryzen 5 5600X',
-      core_count: 6,
-      core_clock: 3.7,
-      boost_clock: 4.6,
-      graphics: 'None',
-      price: 199,
-      rating: 4.5,
-      tdp: 65
-    },
-    {
-      id: 'H7I8J9',
-      name: 'Intel Core i7-11700K',
-      core_count: 8,
-      core_clock: 3.6,
-      boost_clock: 5.0,
-      graphics: 'Intel UHD 750',
-      price: 399,
-      rating: 4.6,
-      tdp: 125
-    },
-    {
-      id: 'K1L2M3',
-      name: 'AMD Ryzen 7 5700G',
-      core_count: 8,
-      core_clock: 3.8,
-      boost_clock: 4.6,
-      graphics: 'Radeon',
-      price: 299,
-      rating: 4.5,
-      tdp: 65
-    },
-    {
-      id: 'N4O5P6',
-      name: 'Intel Core i5-13400F',
-      core_count: 10,
-      core_clock: 2.5,
-      boost_clock: 4.6,
-      graphics: 'None',
-      price: 219,
-      rating: 4.4,
-      tdp: 65
-    }
-  ];
-
+  const [ProductData, setProductsData] = useState([]);
   const [slice, setSlice] = useState(0);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+
+  const [brandsSelected, setBrandsSelected] = React.useState(["Apple", "Samsung", "Sony", "LG", "Amazon Basics"]);
+
+  const brands = ["Apple", "Samsung", "Sony", "LG", "Amazon Basics"];
+
+
+  // Fetch product data from the server
+  useEffect(() => {
+    fetch('http://localhost:3100/products/cpu').then
+    ((response)=> response.json()).then
+    ((data) => {
+      setProductsData(data);
+    })
+  }, [])
+
+  // Close dropdown menus when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      // Close filter box if clicked outside its container and filter button
+      if (isFilterOpen && 
+          !event.target.closest('.filter-container') && 
+          !event.target.closest('.filter-button')) {
+        setIsFilterOpen(false);
+      }
+      
+      // Close sort box if clicked outside its container and sort button
+      if (isSortOpen && 
+          !event.target.closest('.sort-container') && 
+          !event.target.closest('.sort-button')) {
+        setIsSortOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isFilterOpen, isSortOpen]);
+
 
   return (
-    <div>
-      <div className={styles.pageCategoriesSection} data-theme='dark'>
-        <FilterSidebar/>
-        <div className='flex-grow mx-10'>  
-          <center className='font-bold text-4xl mb-8'>
-            <span>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white py-8">
+      <div className="max-w-[85%] mx-auto px-4">
+        {/* Header Section with Curved Background */}
+        <div className="mb-10 rounded-3xl bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 shadow-2xl overflow-hidden">
+          <div className="pt-8 pb-10 px-8">
+            <h1 className="font-bold text-4xl text-center mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
               Choose A CPU
-            </span>
-          </center>
-
-          <hr className='w-full mr-auto'/> 
-            
-          <div className='h-[50px] flex items-center justify-center align-middle space-x-4'>
-            <button className='bg-gray-700 hover:bg-gray-600 text-white rounded-md px-3 py-2 flex items-center transition-colors duration-200'>
-              <RiGridFill className='mr-2'/>
-              <span>Grid</span>
-            </button>
-            <button className='bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 flex items-center transition-colors duration-200'>
-              <FaSort className='mr-2'/>
-              <span>Sort By</span>
-            </button>
-            <button className='bg-gray-700 hover:bg-gray-600 text-white rounded-md px-3 py-2 flex items-center transition-colors duration-200'>
-              <RiListUnordered className='mr-2'/>
-              <span>List</span>
-            </button>
-          </div>
-          
-          <hr className='w-full mr-auto'/> 
-
-          <div className='mt-7 grid grid-cols-1 lg:grid-cols-2 gap-5'>
-            {
-              ProductData.slice(slice, slice+12).map((data, index) => (
-                <GridCard 
-                  key={index}
-                  data={data}
-                />
-              ))
-            }
-          </div>
-
-          <hr className='w-[95%] mx-auto mt-10'/>
-            
-          <div className='flex justify-evenly'>
-            {
-              slice === 0 ?
-              <div className='size-[60px]' />
-              :
-              <button 
-                onClick={() => setSlice(slice-12)}
-                className='bg-blue-500 size-[60px] text-white rounded-[10px] p-4 mt-4 flex items-center justify-center'>
-                <SlArrowLeft className='size-[30px]'/>
-              </button>
-            }
-            
-            <span className='size-[60px] mt-4 text-2xl align-middle flex items-center justify-center'>
-              {Math.floor(slice/12)+1}
-            </span>
-
-            {
-              slice+12 >= ProductData.length ?
-              <div className='size-[60px]' />
-              :
-              <button 
-                onClick={() => setSlice(slice+12)}
-                className='bg-blue-500 size-[60px] text-white rounded-[10px] p-4 mt-4 flex items-center justify-center'>
-                <SlArrowRight className='size-[30px]'/>
-              </button>
-            }
+            </h1>
+            <p className="text-center text-gray-300 max-w-2xl mx-auto">
+              Select the perfect processor for your custom PC build
+            </p>
           </div>
         </div>
+        
+        {/* Control Bar */}
+        <div className="mb-8 relative z-20">
+          <div className="bg-gray-800/50 p-3 rounded-2xl backdrop-blur-sm border border-gray-700/50 shadow-xl mb-6">
+            <div className="flex flex-wrap items-center justify-center space-x-3">
+              {/* View Mode Buttons */}
+              <div className="flex rounded-xl overflow-hidden border border-gray-700">
+                <button 
+                  className={`px-4 py-2 flex items-center transition-all duration-300 ${
+                    viewMode === 'grid' 
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' 
+                      : 'bg-gray-800 text-gray-400 hover:text-white'
+                  }`}
+                  onClick={() => setViewMode('grid')}
+                >
+                  <RiGridFill className="mr-2" />
+                  <span>Grid</span>
+                </button>
+                <button 
+                  className={`px-4 py-2 flex items-center transition-all duration-300 ${
+                    viewMode === 'list' 
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' 
+                      : 'bg-gray-800 text-gray-400 hover:text-white'
+                  }`}
+                  onClick={() => setViewMode('list')}
+                >
+                  <RiListUnordered className="mr-2" />
+                  <span>List</span>
+                </button>
+              </div>
+              
+              {/* Sort Button */}
+              <div className="relative sort-button">
+                <button 
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:brightness-110 text-white rounded-xl px-5 py-2 flex items-center transition-all duration-300 shadow-md"
+                  onClick={() => {
+                    setIsSortOpen(!isSortOpen);
+                    setIsFilterOpen(false); // Close filter box when opening sort box
+                  }}
+                >
+                  <FaSort className="mr-2" />
+                  <span>Sort By</span>
+                </button>
+                <div className="absolute top-12 right-0 z-50 sort-container">
+                  <SortBox
+                    isOpen={isSortOpen}
+                    setIsOpen={setIsSortOpen}
+                    data={ProductData}
+                    setData={setProductsData}
+                  />
+                </div>
+              </div>
+              
+              {/* Filter Button */}
+              <div className="relative filter-button">
+                <button 
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:brightness-110 text-white rounded-xl px-5 py-2 flex items-center transition-all duration-300 shadow-md"
+                  onClick={() => {
+                    setIsFilterOpen(!isFilterOpen);
+                    setIsSortOpen(false); // Close sort box when opening filter box
+                  }}
+                >
+                  <FiFilter className="mr-2" />
+                  <span>Filter By</span>
+                </button>
+                <div className="absolute top-12 right-0 z-50 filter-container">
+                  <FilterBox
+                    brands={brands}
+                    brandsSelected={brandsSelected}
+                    setBrandsSelected={setBrandsSelected}
+                    isOpen={isFilterOpen}
+                    setIsOpen={setIsFilterOpen}
+                    data={ProductData}
+                    setData={setProductsData}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Grid with wider cards */}
+        <div className="relative z-10">
+          <ProductGrid 
+            ProductData={ProductData} 
+            slice={slice} 
+            className="w-full"
+          />
+        </div>
+
+        {/* Pagination Component */}
+        <Pagination 
+          slice={slice}
+          setSlice={setSlice}
+          totalItems={ProductData.length}
+          itemsPerPage={12}
+        />
       </div>
     </div>
   )
 }
-
-
 
 export default CpuPage;

@@ -1,287 +1,177 @@
 'use client'
 
-import React, {useState} from 'react'
-import styles from '../page.module.css';
-import FilterSidebar from '@/components/FilterSidebar/FilterSidebar';
+import React, {useState, useEffect} from 'react'
+import { useSearchParams } from 'next/navigation';
 
-import { TiShoppingCart } from "react-icons/ti";
-import { HiShoppingBag } from "react-icons/hi2";
+import { FaSort } from "react-icons/fa";
+import { RiGridFill, RiListUnordered } from "react-icons/ri";
+import { FiFilter } from "react-icons/fi";
 
-import { Rating } from 'react-simple-star-rating'
-import Link from 'next/link';
+import FilterBox from '@/components/DropBox/FilterBox';
+import SortBox from '@/components/DropBox/SortBox';
+import ProductGrid from '@/components/Cards/GridCard/ProductGrid';
+import Pagination from '@/components/Cards/GridCard/Pagination';
 
-import { SlArrowLeft,SlArrowRight } from "react-icons/sl";
+function PowerSupplyPage() {
+  const buildId = useSearchParams().get('buildId');
 
-function PowersupplyPage() {
-
-  const ProductData=
-  [{'boost_clock': 5,
-    'core_clock': 4.2,
-    'core_count': 8,
-    'graphics': 'Radeon',
-    'name': 'AMD Ryzen 7 7800X3D',
-    'price': 339,
-    'rating': 4.5,
-    'tdp': 120},
-   {'boost_clock': 5.3,
-    'core_clock': 4.7,
-    'core_count': 6,
-    'graphics': 'Radeon',
-    'name': 'AMD Ryzen 5 7600X',
-    'price': 204.99,
-    'rating': 4.1,
-    'tdp': 105},
-   {'boost_clock': 4.6,
-    'core_clock': 3.7,
-    'core_count': 6,
-    'graphics': null,
-    'name': 'AMD Ryzen 5 5600X',
-    'price': 144.31,
-    'rating': 3.8,
-    'tdp': 65},
-   {'boost_clock': 5.1,
-    'core_clock': 3.8,
-    'core_count': 6,
-    'graphics': 'Radeon',
-    'name': 'AMD Ryzen 5 7600',
-    'price': 185,
-    'rating': 4.9,
-    'tdp': 65},
-   {'boost_clock': 6,
-    'core_clock': 3.2,
-    'core_count': 24,
-    'graphics': 'Intel UHD Graphics 770',
-    'name': 'Intel Core i9-14900K',
-    'price': 544.99,
-    'rating': 4.7,
-    'tdp': 125},
-   {'boost_clock': 5.6,
-    'core_clock': 3.4,
-    'core_count': 20,
-    'graphics': 'Intel UHD Graphics 770',
-    'name': 'Intel Core i7-14700K',
-    'price': 399.99,
-    'rating': 3.9,
-    'tdp': 125},
-   {'boost_clock': 4.4,
-    'core_clock': 2.5,
-    'core_count': 6,
-    'graphics': null,
-    'name': 'Intel Core i5-12400F',
-    'price': 128,
-    'rating': 4.3,
-    'tdp': 65},
-   {'boost_clock': 4.2,
-    'core_clock': 3.6,
-    'core_count': 6,
-    'graphics': null,
-    'name': 'AMD Ryzen 5 3600',
-    'price': 84,
-    'rating': 4.0,
-    'tdp': 65},
-    {'boost_clock': 5,
-    'core_clock': 4.2,
-    'core_count': 8,
-    'graphics': 'Radeon',
-    'name': 'AMD Ryzen 7 7800X3D',
-    'price': 339,
-    'rating': 4.5,
-    'tdp': 120},
-   {'boost_clock': 5.3,
-    'core_clock': 4.7,
-    'core_count': 6,
-    'graphics': 'Radeon',
-    'name': 'AMD Ryzen 5 7600X',
-    'price': 204.99,
-    'rating': 4.1,
-    'tdp': 105},
-   {'boost_clock': 4.6,
-    'core_clock': 3.7,
-    'core_count': 6,
-    'graphics': null,
-    'name': 'AMD Ryzen 5 5600X',
-    'price': 144.31,
-    'rating': 3.8,
-    'tdp': 65},
-   {'boost_clock': 5.1,
-    'core_clock': 3.8,
-    'core_count': 6,
-    'graphics': 'Radeon',
-    'name': 'AMD Ryzen 5 7600',
-    'price': 185,
-    'rating': 4.9,
-    'tdp': 65},
-   {'boost_clock': 6,
-    'core_clock': 3.2,
-    'core_count': 24,
-    'graphics': 'Intel UHD Graphics 770',
-    'name': 'Intel Core i9-14900K',
-    'price': 544.99,
-    'rating': 4.7,
-    'tdp': 125},
-   {'boost_clock': 5.6,
-    'core_clock': 3.4,
-    'core_count': 20,
-    'graphics': 'Intel UHD Graphics 770',
-    'name': 'Intel Core i7-14700K',
-    'price': 399.99,
-    'rating': 3.9,
-    'tdp': 125},
-    {'boost_clock': 6,
-      'core_clock': 3.2,
-      'core_count': 24,
-      'graphics': 'Intel UHD Graphics 770',
-      'name': 'Intel Core i9-14900K',
-      'price': 544.99,
-      'rating': 4.7,
-      'tdp': 125},
-     {'boost_clock': 5.6,
-      'core_clock': 3.4,
-      'core_count': 20,
-      'graphics': 'Intel UHD Graphics 770',
-      'name': 'Intel Core i7-14700K',
-      'price': 399.99,
-      'rating': 3.9,
-      'tdp': 125},
-    
-
-];
-
+  const [ProductData, setProductsData] = useState([]);
   const [slice, setSlice] = useState(0);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
 
+  const [brandsSelected, setBrandsSelected] = React.useState(["Apple", "Samsung", "Sony", "LG", "Amazon Basics"]);
 
-  return (
-  <div>
+  const brands = ["Apple", "Samsung", "Sony", "LG", "Amazon Basics"];
 
-    <div className={styles.pageCategoriesSection} data-theme='dark'>
+  useEffect(() => {
+    fetch('http://localhost:3100/products/PowerSupply').then
+    ((response)=> response.json()).then
+    ((data) => {
+      setProductsData(data);
+    })
+  }, [])
 
-    <FilterSidebar/>
-    <div className='flex-grow ml-10'>  
-      <center  className='font-bold text-4xl mb-8'>
-        <span>
-          Choose A Powersupply
-        </span>
-      </center>
-
-      <hr className='w-[95%] mr-auto'/> 
-        
-        <div className='h-[50px] flex items-center justify-center align-middle '>
-          A few buttons here
-        </div>
-      <hr className='w-[95%] mr-auto'/> 
-
-      <div className='mt-7 grid grid-rows-6 grid-cols-2 gap-5'>
-        {
-          ProductData.slice(slice,slice+12).map((data, index)=>(
-            <PowersupplyCard 
-              key={index}
-              data={data}
-            />
-          ))
-        }
-      </div>
-
-      <hr className='w-[95%] mx-auto mt-10'/>
-        
-        <div className='flex justify-evenly'>
-        {
-            slice==0?
-            <div className='size-[60px]' />
-
-            :
-          <button 
-          onClick={()=>(setSlice(slice-13))}
-          className='bg-blue-500 size-[60px] text-white rounded-[10px] p-4 mt-4 flex items-center justify-center'>
-            <SlArrowLeft className='size-[30px]'/>
-          </button>
-
-          }
-          <span className='size-[60px] mt-4 text-2xl align-middle flex items-center justify-center'>
-            {Math.round(slice/12)+1}
-          </span>
-
-          {
-            slice+12>=ProductData.length?
-            <div className='size-[60px]' />
-            :
-          <button 
-          onClick={()=>(setSlice(slice+13))}
-          className='bg-blue-500 size-[60px] text-white rounded-[10px] p-4 mt-4 flex items-center justify-center'>
-            <SlArrowRight className='size-[30px]'/>
-          </button>
-
-          }
-        </div>
-
-        {/* <hr className='w-[95%] mr-auto'/>  */}
-
-    </div>
-  </div>
+  // Close dropdown menus when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      // Close filter box if clicked outside its container and filter button
+      if (isFilterOpen && 
+          !event.target.closest('.filter-container') && 
+          !event.target.closest('.filter-button')) {
+        setIsFilterOpen(false);
+      }
       
-  </div>
-    
-  )
-}
+      // Close sort box if clicked outside its container and sort button
+      if (isSortOpen && 
+          !event.target.closest('.sort-container') && 
+          !event.target.closest('.sort-button')) {
+        setIsSortOpen(false);
+      }
+    }
 
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isFilterOpen, isSortOpen]);
 
-
-function PowersupplyCard(props) {
   return (
-  <div className='bg-black/40 grid grid-cols-[115px_1fr_100px] grid-rows-1 rounded-[20px] p-4 text-[var(--text-color)] w-[95%]' >
-    <div className='col-span-1'>
-      <img src='https://via.placeholder.com/150' alt='product' 
-        className='rounded-[20px] size-[110px] bg-white '/>
-    </div>
-
-    <div className='col-span-1'>
-
-      <div className='font-bold text-2xl grow ml-4'>{props.data.name}</div>
-
-      <div className=''>
-        <ul className='ml-4 list-disc list-inside grid grid-cols-2 grid-rows-3'>
-          {/* <li className='text-lg'>{props.data.price}</li> */}
-          <li className='text-lg'>{props.data.core_clock}Hz</li>
-          <li className='text-lg'>{props.data.boost_clock}Hz</li>
-
-          <li className='text-lg'>{props.data.core_count} cores</li>
-          <li className='text-lg'>{props.data.tdp} W</li>
-          <li className='text-lg col-span-2'>{props.data.graphics}</li>
-        </ul>
-  
-      </div>
-
-    </div>
-
-    <div className='flex flex-col justify-center w-auto'>
-      <div className='flex flex-col h-[65%] items-center justify-center text-2xl font-bold mr-[20px]'>
-          <span>&#36;{props.data.price}</span>
-          <div>
-            <Rating
-              SVGclassName={"inline-block"}
-              initialValue={props.data.rating}
-              readonly={true}
-              allowFraction={true}
-              iconsCount={5}
-              size={20}
-            />
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white py-8">
+      <div className="max-w-[85%] mx-auto px-4">
+        {/* Header Section with Curved Background */}
+        <div className="mb-10 rounded-3xl bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 shadow-2xl overflow-hidden">
+          <div className="pt-8 pb-10 px-8">
+            <h1 className="font-bold text-4xl text-center mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
+              Choose A PowerSupply
+            </h1>
+            <p className="text-center text-gray-300 max-w-2xl mx-auto">
+              Select the perfect processor for your custom PC build
+            </p>
           </div>
-          <Link
-            href={{pathname:'/builder'}}
-            >
-            <button className='bg-blue-500 text-white rounded-[10px] w-[80px] h-[35px] mx-auto mt-4 flex items-center justify-center'>
-              <TiShoppingCart style={{ scale: 1.2 }} />
-            </button>
-          </Link>
+        </div>
+        
+        {/* Control Bar */}
+        <div className="mb-8 relative z-20">
+          <div className="bg-gray-800/50 p-3 rounded-2xl backdrop-blur-sm border border-gray-700/50 shadow-xl mb-6">
+            <div className="flex flex-wrap items-center justify-center space-x-3">
+              {/* View Mode Buttons */}
+              <div className="flex rounded-xl overflow-hidden border border-gray-700">
+                <button 
+                  className={`px-4 py-2 flex items-center transition-all duration-300 ${
+                    viewMode === 'grid' 
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' 
+                      : 'bg-gray-800 text-gray-400 hover:text-white'
+                  }`}
+                  onClick={() => setViewMode('grid')}
+                >
+                  <RiGridFill className="mr-2" />
+                  <span>Grid</span>
+                </button>
+                <button 
+                  className={`px-4 py-2 flex items-center transition-all duration-300 ${
+                    viewMode === 'list' 
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' 
+                      : 'bg-gray-800 text-gray-400 hover:text-white'
+                  }`}
+                  onClick={() => setViewMode('list')}
+                >
+                  <RiListUnordered className="mr-2" />
+                  <span>List</span>
+                </button>
+              </div>
+              
+              {/* Sort Button */}
+              <div className="relative sort-button">
+                <button 
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:brightness-110 text-white rounded-xl px-5 py-2 flex items-center transition-all duration-300 shadow-md"
+                  onClick={() => {
+                    setIsSortOpen(!isSortOpen);
+                    setIsFilterOpen(false); // Close filter box when opening sort box
+                  }}
+                >
+                  <FaSort className="mr-2" />
+                  <span>Sort By</span>
+                </button>
+                <div className="absolute top-12 right-0 z-50 sort-container">
+                  <SortBox
+                    isOpen={isSortOpen}
+                    setIsOpen={setIsSortOpen}
+                    data={ProductData}
+                    setData={setProductsData}
+                  />
+                </div>
+              </div>
+              
+              {/* Filter Button */}
+              <div className="relative filter-button">
+                <button 
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:brightness-110 text-white rounded-xl px-5 py-2 flex items-center transition-all duration-300 shadow-md"
+                  onClick={() => {
+                    setIsFilterOpen(!isFilterOpen);
+                    setIsSortOpen(false); // Close sort box when opening filter box
+                  }}
+                >
+                  <FiFilter className="mr-2" />
+                  <span>Filter By</span>
+                </button>
+                <div className="absolute top-12 right-0 z-50 filter-container">
+                  <FilterBox
+                    brands={brands}
+                    brandsSelected={brandsSelected}
+                    setBrandsSelected={setBrandsSelected}
+                    isOpen={isFilterOpen}
+                    setIsOpen={setIsFilterOpen}
+                    data={ProductData}
+                    setData={setProductsData}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Grid with wider cards */}
+        <div className="relative z-10">
+          <ProductGrid 
+            ProductData={ProductData} 
+            slice={slice} 
+            buildId={buildId}
+            className="w-full"
+          />
+        </div>
+
+        {/* Pagination Component */}
+        <Pagination 
+          slice={slice}
+          setSlice={setSlice}
+          totalItems={ProductData.length}
+          itemsPerPage={12}
+        />
       </div>
-      {/* 
-      <button className='bg-blue-500 text-white rounded-[10px] w-[80px] h-[105px] ml-4 flex items-center justify-center'>
-        <HiShoppingBag style={{ scale: 2.5 }} />
-      </button> */}
-      </div>
-  </div>
+    </div>
   )
 }
 
-
-
-export default PowersupplyPage
+export default PowerSupplyPage;

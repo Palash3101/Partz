@@ -1,49 +1,88 @@
 .headerWrapper{
-    background-image: linear-gradient(var(--background-header),  var(--background-color));
-    color: var(--font-color);
-
-    padding-top: 6px;
-    padding-bottom: 6px;
-
-    position: relative;
-
-
+  background-image: linear-gradient(black,  rgb(17, 24, 39));
+  padding-top: 10px;
+  padding-bottom: 6px;
+  position: relative;
 }
 
 .headerTitle{
-    font-size: 45px;
-    text-align: center;
-    font-weight: bold;
-
-    background-color: var(--background-header);
-    color: var(--font-color);
-}
-
-.headerSearchButton{
-    text-align: center;
-    font-size: 23px;
-
-    background-color: rgba(0, 0, 0, 0);
-    color: #EEEEEE;
-
-    height: 45px;
-    margin-left: 8px;
-    margin-right: 8px;
-
-
-    display: flex;
-    align-items: flex-end;
-
+  font-size: 35px;
+  text-align: center;
+  font-weight: bold;
+  background-color: linear-gradient(black,  rgb(17, 24, 39));
+  color: var(--font-color);
+  margin-right: 20px;
 }
 
 .headerSearchButtonWrapper{
-    display: flex;
-    background-image: linear-gradient(var(--background-header),  var(--background-color));
+  display: flex;
+  background-image: linear-gradient(black,  rgb(17, 24, 39));
+  color: #EEEEEE;
+  padding-left: 30px;
+  padding-right: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    color: #EEEEEE;
+/* Navigation buttons in middle */
+.navButtonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    padding-left: 30px;
+.headerNavButton{
+  text-align: center;
+  font-size: 23px;
+  background-color: transparent;
+  color: #aaaaaa;
+  height: 45px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0 12px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  transition: color 0.2s;
+}
 
+.headerNavButton:hover {
+  color: #FFFFFF;
+}
+
+/* Dropdown button styling */
+.dropdownButton {
+  position: relative;
+  padding-right: 26px;
+}
+
+.dropdownIcon {
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+  scale: 1.3;
+}
+
+/* Right side icons */
+.rightIconsContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.iconButton {
+  background-color: transparent;
+  color: #EEEEEE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s;  
+}
+
+.iconButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 
@@ -51,17 +90,14 @@
   background-color: rgb(30, 30, 30, 0.95);
   color: var(--font-color);
   position: absolute;
-  top: 125px; 
+  top: 75px; 
   left: 2.5%;
-  z-index: 10;
+  z-index: 70;
   height: auto;
   width: 95%;
-
   display: flex;
   flex-direction: row;
-
   transform-origin: top;
-
   border-radius: 30px;
   padding: 10px 15px;
 }
